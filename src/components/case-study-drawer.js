@@ -35,7 +35,7 @@ const jsxConverters = ({ defaultConverters }) => ({
   quote: ({ node, nodesToJSX }) => {
     const children = nodesToJSX({ nodes: node.children });
     return (
-      <blockquote className="mb-4 border-l-[4px] pl-4 text-lg font-light leading-normal">
+      <blockquote className="mb-4 border-l-[1px] pl-4 text-lg font-light leading-normal">
         {children}
       </blockquote>
     );
@@ -129,7 +129,7 @@ export default function CaseStudyDrawer({ study, onClose }) {
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className="fixed right-6 top-6 z-10 flex size-10 items-center justify-center border-[4px] bg-background transition-colors hover:bg-secondary"
+          className="fixed right-6 top-6 z-10 flex size-10 items-center justify-center border-[1px] bg-background transition-colors hover:bg-secondary"
         >
           <svg
             width="18"
@@ -156,7 +156,7 @@ export default function CaseStudyDrawer({ study, onClose }) {
         )}
 
         <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10 lg:py-14">
-          <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
+          <p className="mb-3 font-mono text-xs font-medium uppercase text-muted-foreground">
             {cached.tag}
           </p>
           <h2 className="mb-8 text-3xl font-semibold sm:text-4xl lg:text-5xl">

@@ -31,7 +31,7 @@ export default function PolicyPage({ title, lastUpdated, children }) {
       <main>
         <section className="mx-4 pt-36 pb-16 lg:pt-44">
           <article className="mx-auto max-w-3xl">
-            <p className="mb-6 font-mono text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="mb-6 font-mono text-xs font-medium uppercase text-muted-foreground">
               Last updated: {lastUpdated}
             </p>
             <h1 className="mb-10 text-4xl font-semibold text-pretty lg:text-5xl">

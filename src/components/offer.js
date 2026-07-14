@@ -30,9 +30,6 @@ export default async function Offer() {
   return (
     <section id="offer" className="mx-4 scroll-mt-24 pb-10 lg:pb-30">
       <div className="mx-auto max-w-6xl border-t pt-10 lg:pt-16">
-        <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
-          {data.eyebrow}
-        </p>
         <h2 className="mb-12 max-w-3xl text-4xl font-semibold sm:text-5xl lg:mb-16 lg:text-6xl">
           <AccentHeading
             before={data.headingBefore}
@@ -44,7 +41,7 @@ export default async function Offer() {
           {offers.map((offer) => (
             <div
               key={offer.id ?? offer.title}
-              className={`flex flex-col p-8 lg:p-10 ${
+              className={`flex flex-col rounded-[4px] p-8 lg:p-10 ${
                 offer.featured
                   ? "bg-primary text-primary-foreground"
                   : "border bg-background"

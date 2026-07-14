@@ -45,7 +45,7 @@ export default async function LogoMarquee() {
 
   return (
     <section className="py-14 lg:py-24">
-      <p className="mb-10 text-center font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
+      <p className="mb-10 text-center font-mono text-xs font-medium uppercase text-muted-foreground">
         Trusted by Leading Brands Across Industries
       </p>
       <div className="flex flex-col gap-6">

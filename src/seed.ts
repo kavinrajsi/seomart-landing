@@ -69,7 +69,6 @@ const seed = async () => {
   await payload.updateGlobal({
     slug: 'stats',
     data: {
-      eyebrow: 'Revenue Impact',
       headingBefore: 'Numbers that',
       headingAccent: 'actually',
       headingAfter: 'matter to your business.',
@@ -85,13 +84,11 @@ const seed = async () => {
   await payload.updateGlobal({
     slug: 'services',
     data: {
-      eyebrow: 'Our Services',
       headingBefore: 'Everything you need to',
       headingAccent: 'grow',
       headingAfter: ", nothing you don't.",
       bands: [
         {
-          eyebrow: 'Search Optimisation Services',
           headingBefore: 'The future-proof advantage',
           headingAccent: 'in search',
           headingAfter: '.',
@@ -104,7 +101,6 @@ const seed = async () => {
           ],
         },
         {
-          eyebrow: 'Performance Marketing Services',
           headingBefore: 'The measurable advantage',
           headingAccent: 'in digital growth',
           headingAfter: '.',
@@ -117,7 +113,6 @@ const seed = async () => {
           ],
         },
         {
-          eyebrow: 'Website Development Services',
           headingBefore: 'The conversion advantage',
           headingAccent: 'online',
           headingAfter: '.',
@@ -137,7 +132,6 @@ const seed = async () => {
   await payload.updateGlobal({
     slug: 'industries',
     data: {
-      eyebrow: 'Industry Expertise',
       headingBefore: 'Industries we have',
       headingAccent: 'worked',
       headingAfter: 'with.',
@@ -158,7 +152,6 @@ const seed = async () => {
   await payload.updateGlobal({
     slug: 'process',
     data: {
-      eyebrow: 'Our Process',
       headingBefore: 'A clear path to',
       headingAccent: 'compounding',
       headingAfter: 'growth.',
@@ -174,7 +167,6 @@ const seed = async () => {
   await payload.updateGlobal({
     slug: 'offer',
     data: {
-      eyebrow: 'Strong Offer',
       headingBefore: 'Start with a',
       headingAccent: 'free',
       headingAfter: 'audit.',
@@ -211,7 +203,6 @@ const seed = async () => {
   await payload.updateGlobal({
     slug: 'why',
     data: {
-      eyebrow: 'Why SearchMadarth®',
       headingBefore: 'Built for',
       headingAccent: 'real',
       headingAfter: 'results.',
@@ -227,7 +218,6 @@ const seed = async () => {
   await payload.updateGlobal({
     slug: 'faq',
     data: {
-      eyebrow: 'FAQ',
       headingBefore: 'Frequently asked',
       headingAccent: 'questions',
       headingAfter: '.',

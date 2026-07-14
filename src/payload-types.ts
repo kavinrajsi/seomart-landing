@@ -263,6 +263,10 @@ export interface Testimonial {
    */
   initials?: string | null;
   /**
+   * Company logo shown in the footer. When empty, the initials monogram is shown instead.
+   */
+  logo?: (number | null) | Media;
+  /**
    * Lower numbers appear first.
    */
   order?: number | null;
@@ -446,6 +450,7 @@ export interface TestimonialsSelect<T extends boolean = true> {
   name?: T;
   role?: T;
   initials?: T;
+  logo?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -526,10 +531,6 @@ export interface Hero {
 export interface Stat {
   id: number;
   /**
-   * Small uppercase label above the heading.
-   */
-  eyebrow?: string | null;
-  /**
    * Heading text before the accent word.
    */
   headingBefore?: string | null;
@@ -570,10 +571,6 @@ export interface Stat {
 export interface Service {
   id: number;
   /**
-   * Small uppercase label above the heading.
-   */
-  eyebrow?: string | null;
-  /**
    * Heading text before the accent word.
    */
   headingBefore?: string | null;
@@ -587,7 +584,6 @@ export interface Service {
   headingAfter?: string | null;
   bands?:
     | {
-        eyebrow: string;
         headingBefore?: string | null;
         headingAccent?: string | null;
         headingAfter?: string | null;
@@ -628,10 +624,6 @@ export interface Service {
 export interface Industry {
   id: number;
   /**
-   * Small uppercase label above the heading.
-   */
-  eyebrow?: string | null;
-  /**
    * Heading text before the accent word.
    */
   headingBefore?: string | null;
@@ -660,10 +652,6 @@ export interface Industry {
 export interface Process {
   id: number;
   /**
-   * Small uppercase label above the heading.
-   */
-  eyebrow?: string | null;
-  /**
    * Heading text before the accent word.
    */
   headingBefore?: string | null;
@@ -691,10 +679,6 @@ export interface Process {
  */
 export interface Offer {
   id: number;
-  /**
-   * Small uppercase label above the heading.
-   */
-  eyebrow?: string | null;
   /**
    * Heading text before the accent word.
    */
@@ -738,10 +722,6 @@ export interface Offer {
 export interface Why {
   id: number;
   /**
-   * Small uppercase label above the heading.
-   */
-  eyebrow?: string | null;
-  /**
    * Heading text before the accent word.
    */
   headingBefore?: string | null;
@@ -769,10 +749,6 @@ export interface Why {
  */
 export interface Faq {
   id: number;
-  /**
-   * Small uppercase label above the heading.
-   */
-  eyebrow?: string | null;
   /**
    * Heading text before the accent word.
    */
@@ -815,7 +791,6 @@ export interface HeroSelect<T extends boolean = true> {
  * via the `definition` "stats_select".
  */
 export interface StatsSelect<T extends boolean = true> {
-  eyebrow?: T;
   headingBefore?: T;
   headingAccent?: T;
   headingAfter?: T;
@@ -838,14 +813,12 @@ export interface StatsSelect<T extends boolean = true> {
  * via the `definition` "services_select".
  */
 export interface ServicesSelect<T extends boolean = true> {
-  eyebrow?: T;
   headingBefore?: T;
   headingAccent?: T;
   headingAfter?: T;
   bands?:
     | T
     | {
-        eyebrow?: T;
         headingBefore?: T;
         headingAccent?: T;
         headingAfter?: T;
@@ -869,7 +842,6 @@ export interface ServicesSelect<T extends boolean = true> {
  * via the `definition` "industries_select".
  */
 export interface IndustriesSelect<T extends boolean = true> {
-  eyebrow?: T;
   headingBefore?: T;
   headingAccent?: T;
   headingAfter?: T;
@@ -889,7 +861,6 @@ export interface IndustriesSelect<T extends boolean = true> {
  * via the `definition` "process_select".
  */
 export interface ProcessSelect<T extends boolean = true> {
-  eyebrow?: T;
   headingBefore?: T;
   headingAccent?: T;
   headingAfter?: T;
@@ -909,7 +880,6 @@ export interface ProcessSelect<T extends boolean = true> {
  * via the `definition` "offer_select".
  */
 export interface OfferSelect<T extends boolean = true> {
-  eyebrow?: T;
   headingBefore?: T;
   headingAccent?: T;
   headingAfter?: T;
@@ -937,7 +907,6 @@ export interface OfferSelect<T extends boolean = true> {
  * via the `definition` "why_select".
  */
 export interface WhySelect<T extends boolean = true> {
-  eyebrow?: T;
   headingBefore?: T;
   headingAccent?: T;
   headingAfter?: T;
@@ -957,7 +926,6 @@ export interface WhySelect<T extends boolean = true> {
  * via the `definition` "faq_select".
  */
 export interface FaqSelect<T extends boolean = true> {
-  eyebrow?: T;
   headingBefore?: T;
   headingAccent?: T;
   headingAfter?: T;

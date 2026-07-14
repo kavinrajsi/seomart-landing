@@ -15,7 +15,6 @@ export const Services: GlobalConfig = {
       type: 'array',
       labels: { singular: 'Service Band', plural: 'Service Bands' },
       fields: [
-        { name: 'eyebrow', type: 'text', required: true },
         {
           type: 'row',
           fields: [

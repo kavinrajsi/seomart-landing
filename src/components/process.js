@@ -7,7 +7,6 @@ export default async function Process() {
 
   return (
     <ProcessClient
-      eyebrow={data.eyebrow}
       headingBefore={data.headingBefore}
       headingAccent={data.headingAccent}
       headingAfter={data.headingAfter}

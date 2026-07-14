@@ -21,8 +21,24 @@ const anchorId = (href) => href.split("#")[1];
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState("");
-  const [hidden, setHidden] = useState(false);
   const [dark, setDark] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
+  // Hide on scroll down, reveal on scroll up. Always show near the top.
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y < 80) setHidden(false);
+      else if (y > lastY + 4) {
+        setHidden(true);
+        setOpen(false);
+      } else if (y < lastY - 4) setHidden(false);
+      lastY = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const sections = links
@@ -48,21 +64,6 @@ export default function Header() {
     );
 
     sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, []);
-
-  // Hide the nav while the Services section fills the viewport.
-  useEffect(() => {
-    const services = document.getElementById("services");
-    if (!services) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setHidden(entry.isIntersecting);
-        if (entry.isIntersecting) setOpen(false);
-      },
-      { rootMargin: "-15% 0px -15% 0px" }
-    );
-    observer.observe(services);
     return () => observer.disconnect();
   }, []);
 
@@ -122,14 +123,14 @@ export default function Header() {
                   key={l.href}
                   href={l.href}
                   aria-current={active ? "true" : undefined}
-                  className={`rounded-lg border-[4px] px-4 py-2 text-base font-medium transition-colors ${
+                  className={`rounded-lg px-4 py-2 text-base font-medium transition-colors ${
                     active
                       ? dark
-                        ? "bg-primary-foreground text-primary"
-                        : "border-[4px] bg-primary text-primary-foreground"
+                        ? "border-[1px] bg-primary-foreground text-primary"
+                        : "border-[1px] border-[var(--primary)] bg-primary text-primary-foreground"
                       : dark
-                        ? "text-primary-foreground/70 hover:bg-foreground/10 hover:text-primary-foreground"
-                        : "border-[4px] text-muted-foreground hover:bg-muted hover:text-foreground"
+                        ? "border-[1px] border-transparent text-primary-foreground/70 hover:bg-foreground/10 hover:text-primary-foreground"
+                        : "border-[1px] border-transparent text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
                   {l.label}
@@ -177,7 +178,7 @@ export default function Header() {
 
         {open && (
           <div
-            className={`fixed inset-x-4 top-[84px] bottom-0 z-[60] flex flex-col rounded-lg border-[4px] p-4 shadow-2xl transition-colors duration-300 lg:hidden ${
+            className={`fixed inset-x-4 top-[84px] bottom-0 z-[60] flex flex-col rounded-lg border-[1px] p-4 shadow-2xl transition-colors duration-300 lg:hidden ${
               dark
                 ? "border-foreground/15 bg-primary text-primary-foreground"
                 : "border-black/10 bg-background text-foreground"

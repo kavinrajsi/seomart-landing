@@ -26,47 +26,37 @@ export default async function Testimonials() {
   return (
     <section className="mx-4 pb-10 lg:pb-30">
       <div className="mx-auto max-w-6xl border-t pt-10 lg:pt-16">
-        <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
-          Testimonials
-        </p>
         <h2 className="mb-4 max-w-3xl text-4xl font-semibold sm:text-5xl lg:text-6xl">
           Businesses that took the <span className="serif-accent">leap</span>.
         </h2>
         <p className="mb-12 max-w-screen-md text-lg text-muted-foreground">
           Real owners. Real results. Measured in revenue, not vanity metrics.
         </p>
-        <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {testimonials.map((testimonial) => (
             <figure
               key={testimonial.id ?? testimonial.name}
-              className="group flex flex-col justify-between bg-background p-8 transition-colors hover:bg-card lg:p-10"
+              className="flex flex-col justify-between rounded-[4px] border border-border bg-background p-6 lg:p-8"
             >
               <div>
-                <span
-                  aria-hidden="true"
-                  className="serif-accent block select-none text-7xl leading-normal text-foreground/15 transition-colors group-hover:text-foreground/30"
-                >
-                  “
-                </span>
-                <blockquote className="mb-10 mt-4 text-xl font-light leading-normal lg:text-2xl">
+                <Stars />
+                <blockquote className="mt-6 text-base leading-normal text-foreground">
                   {testimonial.quote}
                 </blockquote>
               </div>
-              <figcaption className="flex items-center gap-4">
-                <span
-                  aria-hidden="true"
-                  className="flex size-10 shrink-0 items-center justify-center border-[4px] bg-secondary font-mono text-xs font-medium tracking-[0.1em]"
-                >
-                  {testimonial.initials}
-                </span>
+              <figcaption className="mt-8 flex items-center gap-4 border-t border-border pt-6">
+                {testimonial.logo ? (
+                  <img
+                    src={testimonial.logo}
+                    alt={testimonial.name}
+                    className="h-8 w-auto shrink-0 object-contain"
+                  />
+                ) : null}
                 <span className="flex flex-col gap-0.5">
-                  <span className="font-mono text-xs uppercase tracking-[0.15em]">
-                    {testimonial.name}
+                  <span className="text-sm font-medium">{testimonial.name}</span>
+                  <span className="font-mono text-[11px] uppercase text-muted-foreground">
+                    {testimonial.role}
                   </span>
-                  <span className="text-xs text-muted-foreground">{testimonial.role}</span>
-                </span>
-                <span className="ml-auto">
-                  <Stars />
                 </span>
               </figcaption>
             </figure>

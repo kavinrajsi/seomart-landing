@@ -6,9 +6,9 @@ const variants = {
   inverted:
     "rounded-lg bg-background text-foreground hover:bg-background/90 focus-visible:ring-ring font-medium",
   ghost:
-    "rounded-lg border border-current bg-transparent text-current font-mono text-xs font-medium uppercase tracking-[0.15em] hover:bg-foreground/5 focus-visible:ring-ring",
+    "rounded-lg border border-current bg-transparent text-current font-mono text-base font-medium uppercase hover:bg-foreground/5 focus-visible:ring-ring",
   "ghost-light":
-    "rounded-lg border border-current bg-transparent text-current font-mono text-xs font-medium uppercase tracking-[0.15em] hover:bg-foreground/5 focus-visible:ring-ring",
+    "rounded-lg border border-current bg-transparent text-current font-mono text-base font-medium uppercase hover:bg-foreground/5 focus-visible:ring-ring",
 };
 
 export default function Button({

@@ -33,6 +33,12 @@ export const Testimonials: CollectionConfig = {
       admin: { description: 'Monogram shown in the avatar, e.g. "BG".' },
     },
     {
+      name: 'logo',
+      type: 'upload',
+      relationTo: 'media',
+      admin: { description: 'Company logo shown in the footer. When empty, the initials monogram is shown instead.' },
+    },
+    {
       name: 'order',
       type: 'number',
       defaultValue: 0,

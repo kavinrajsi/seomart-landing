@@ -112,7 +112,7 @@ const glyphs = {
 
 function ServiceCard({ icon, title, body }) {
   return (
-    <div className="border-[4px] bg-card p-4 sm:p-5">
+    <div className="border-[1px] bg-card p-4 sm:p-5">
       <div className="mb-2 flex items-center gap-3">
         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
           <Icon path={glyphs[icon]} size={20} />
@@ -130,23 +130,23 @@ function ServiceCard({ icon, title, body }) {
 const HEADER_H = 64;
 const TOP_BASE = 24;
 
-function ServiceBand({ band, index }) {
+function ServiceBand({ band, index, isLast }) {
   const cards = band.cards ?? [];
+  // Last card gets no tall min-height so the deck releases into the CTA
+  // sooner once it pins; earlier cards keep full-height to pace the stack.
+  const height = isLast ? "" : "min-h-[70vh] lg:min-h-[100svh]";
   return (
     <article
-      className="stack-card mb-0 flex flex-col border-[4px] bg-card min-h-[70vh] lg:min-h-[100svh] motion-safe:sticky"
+      className={`stack-card mb-0 flex flex-col border-[1px] bg-card motion-safe:sticky ${height}`}
       style={{ top: `${TOP_BASE + index * HEADER_H}px` }}
     >
-      <header className="flex h-16 items-center justify-between gap-4 border-b-[4px] bg-card px-6 lg:px-10">
+      <header className="flex h-16 items-center justify-between gap-4 border-b-[1px] bg-card px-6 lg:px-10">
         <div className="flex items-baseline gap-3">
           <span className="font-mono text-xs text-muted-foreground">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <span className="text-xl font-semibold sm:text-2xl">
-            {band.eyebrow.replace(" Services", "")}
-          </span>
         </div>
-        <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
+        <span className="font-mono text-[11px] uppercase text-muted-foreground">
           {cards.length} services
         </span>
       </header>
@@ -182,9 +182,6 @@ export default async function Services() {
   return (
     <section id="services" className="mx-4 scroll-mt-24 pb-10 lg:pb-30">
       <div className="mx-auto max-w-6xl">
-        <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
-          {data.eyebrow}
-        </p>
         <h2 className="mb-12 max-w-3xl text-4xl font-semibold sm:text-5xl lg:mb-16 lg:text-6xl">
           <AccentHeading
             before={data.headingBefore}
@@ -194,10 +191,15 @@ export default async function Services() {
         </h2>
 
         {bands.map((band, i) => (
-          <ServiceBand key={band.id ?? band.eyebrow} band={band} index={i} />
+          <ServiceBand
+            key={band.id ?? i}
+            band={band}
+            index={i}
+            isLast={i === bands.length - 1}
+          />
         ))}
 
-        <div className="mt-4 flex flex-col gap-6 border-[4px] p-6 sm:p-8 lg:flex-row lg:items-center">
+        <div className="mt-4 flex flex-col gap-6 border-[1px] p-6 sm:p-8 lg:flex-row lg:items-center">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Icon path={glyphs.chart} size={22} />
           </div>

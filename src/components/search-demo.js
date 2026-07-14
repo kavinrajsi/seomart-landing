@@ -82,8 +82,8 @@ export default function SearchDemo() {
 
   return (
     <div className="mx-auto w-full max-w-2xl" aria-hidden="true">
-      <div className="rounded-lg border-[4px] bg-background p-2 shadow-[0_2px_20px_0_rgba(37,37,33,0.05)]">
-        <div className="flex items-center gap-3 rounded-lg bg-muted/60 px-4 py-3.5">
+      <div className="rounded-lg border-[1px] bg-background p-2 shadow-[0_2px_20px_0_rgba(37,37,33,0.05)]">
+        <div className="flex items-center gap-3 rounded-[4px] bg-muted/60 px-4 py-3.5">
           <svg
             width="18"
             height="18"
@@ -107,7 +107,7 @@ export default function SearchDemo() {
             showResult ? "opacity-100" : "opacity-0"
           }`}
         >
-          <span className="rounded bg-primary px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-primary-foreground">
+          <span className="rounded bg-primary px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase text-primary-foreground">
             Top result
           </span>
           <span className="truncate text-base font-medium">

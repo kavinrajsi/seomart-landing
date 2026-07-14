@@ -19,7 +19,7 @@ const legalLinks = [
 export default function Footer() {
   return (
     <footer className="bg-primary pb-24 text-primary-foreground sm:pb-10">
-      <div className="mx-auto flex max-w-6xl flex-col gap-10 border-t-[4px] border-foreground/10 px-6 pt-10 md:pt-14">
+      <div className="mx-auto flex max-w-6xl flex-col gap-10 border-t-[1px] border-foreground/10 px-6 pt-10 md:pt-14">
         <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
           <Logo className="h-5 w-auto" />
           <nav
@@ -30,7 +30,7 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="font-mono text-xs uppercase tracking-[0.1em] text-primary-foreground/60 hover:text-primary-foreground"
+                className="font-mono text-xs uppercase text-primary-foreground/60 hover:text-primary-foreground"
               >
                 {link.label}
               </Link>
@@ -46,13 +46,13 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="font-mono text-[11px] uppercase tracking-[0.1em] text-primary-foreground/50 hover:text-primary-foreground"
+                className="font-mono text-[11px] uppercase text-primary-foreground/50 hover:text-primary-foreground"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
-          <p className="text-center font-mono text-[11px] uppercase tracking-[0.1em] text-primary-foreground/50">
+          <p className="text-center font-mono text-[11px] uppercase text-primary-foreground/50">
             © {new Date().getFullYear()} SearchMadarth®. All rights reserved.
           </p>
         </div>

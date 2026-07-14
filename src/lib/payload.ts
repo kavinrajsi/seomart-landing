@@ -57,9 +57,19 @@ export const getTestimonials = unstable_cache(
         collection: 'testimonials',
         sort: 'order',
         limit: 100,
-        depth: 0,
+        depth: 1,
       })
-      return docs
+      return docs.map((testimonial: any) => ({
+        id: testimonial.id,
+        quote: testimonial.quote as string,
+        name: testimonial.name as string,
+        role: (testimonial.role as string | null) ?? null,
+        initials: (testimonial.initials as string | null) ?? null,
+        logo:
+          testimonial.logo && typeof testimonial.logo === 'object'
+            ? ((testimonial.logo as { url?: string }).url ?? null)
+            : null,
+      }))
     } catch (error) {
       console.error('Failed to load testimonials:', error)
       return []
