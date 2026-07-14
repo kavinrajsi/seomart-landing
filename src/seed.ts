@@ -180,7 +180,7 @@ const seed = async () => {
       headingAfter: 'audit.',
       offers: [
         {
-          title: 'Get a Free Digital Growth Audit',
+          title: 'Digital Growth Audit',
           items: [
             { text: 'Digital Health Score' },
             { text: 'Gap Analysis Report' },

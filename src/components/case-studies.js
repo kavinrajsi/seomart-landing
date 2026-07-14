@@ -40,7 +40,7 @@ export default async function CaseStudies() {
   return (
     <section id="work" className="scroll-mt-24 pb-10 lg:pb-30">
       <div className="mx-4">
-        <div className="mx-auto max-w-6xl border-t-[4px] pt-10 lg:pt-16">
+        <div className="mx-auto max-w-6xl border-t pt-10 lg:pt-16">
           <p
 
             className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground"

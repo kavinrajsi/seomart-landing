@@ -8,7 +8,7 @@ export default async function Industries() {
 
   return (
     <section className="mx-4 pb-10 lg:pb-30">
-      <div className="mx-auto max-w-6xl border-t-[4px] pt-10 lg:pt-16">
+      <div className="mx-auto max-w-6xl border-t pt-10 lg:pt-16">
         <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
           {data.eyebrow}
         </p>
@@ -21,7 +21,7 @@ export default async function Industries() {
         </h2>
         <ul>
           {industries.map((industry) => (
-            <li key={industry.id ?? industry.name} className="group border-t-[4px] last:border-b-[4px]">
+            <li key={industry.id ?? industry.name} className="group border-t last:border-b">
               <div className="grid grid-cols-1 items-baseline gap-1 py-5 sm:grid-cols-[1.2fr_1fr] sm:gap-6 lg:py-6">
                 <h3 className="text-2xl font-light transition-transform duration-300 group-hover:translate-x-2 sm:text-3xl lg:text-4xl">
                   {industry.name}
