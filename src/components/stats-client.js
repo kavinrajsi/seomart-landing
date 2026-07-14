@@ -21,42 +21,41 @@ export default function StatsClient({
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const cards = gsap.utils.toArray("[data-stat]", section.current);
-        if (!cards.length) return;
+      ScrollTrigger.config({ ignoreMobileResize: true });
+      const cards = gsap.utils.toArray("[data-stat]", section.current);
+      if (!cards.length) return;
 
-        gsap.set(cards, { opacity: 0, y: 24 });
+      gsap.set(cards, { opacity: 0, y: 24 });
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section.current,
-            start: "top top",
-            end: () => `+=${cards.length * 320}`,
-            pin: true,
-            scrub: true,
-          },
-        });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section.current,
+          start: "top top",
+          end: () => `+=${cards.length * 320}`,
+          pin: true,
+          scrub: true,
+          anticipatePin: 1,
+        },
+      });
 
-        cards.forEach((card, i) => {
-          const numEl = card.querySelector("[data-num]");
-          const value = parseFloat(numEl.dataset.value);
-          const decimals = parseInt(numEl.dataset.decimals || "0", 10);
-          const counter = { v: 0 };
+      cards.forEach((card, i) => {
+        const numEl = card.querySelector("[data-num]");
+        const value = parseFloat(numEl.dataset.value);
+        const decimals = parseInt(numEl.dataset.decimals || "0", 10);
+        const counter = { v: 0 };
 
-          tl.to(card, { opacity: 1, y: 0, duration: 0.4 }, i).to(
-            counter,
-            {
-              v: value,
-              duration: 0.6,
-              ease: "power2.out",
-              onUpdate: () => {
-                numEl.textContent = counter.v.toFixed(decimals);
-              },
+        tl.to(card, { opacity: 1, y: 0, duration: 0.4 }, i).to(
+          counter,
+          {
+            v: value,
+            duration: 0.6,
+            ease: "power2.out",
+            onUpdate: () => {
+              numEl.textContent = counter.v.toFixed(decimals);
             },
-            i
-          );
-        });
+          },
+          i
+        );
       });
     },
     { scope: section }

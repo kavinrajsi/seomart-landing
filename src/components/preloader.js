@@ -24,7 +24,6 @@ const anchorY = (h) => () => window.innerHeight - (h + BAR_H) - MARGIN * 2;
 // fill + 0→100% counter rise. At 100% the panel fades out (revealing the page)
 // and the video docks bottom-right as a demo-reel widget. EXPAND grows the same
 // video up-left to a large player (with sound); COLLAPSE docks it back.
-// Reduced-motion skips the intro. The bar/controls live inside the video.
 export default function Preloader() {
   const overlay = useRef(null);
   const bg = useRef(null);
@@ -38,58 +37,44 @@ export default function Preloader() {
   const [expanded, setExpanded] = useState(false);
 
   useGSAP(() => {
-    const mm = gsap.matchMedia();
-    mm.add(
-      {
-        reduce: "(prefers-reduced-motion: reduce)",
-        ok: "(prefers-reduced-motion: no-preference)",
+    document.body.style.overflow = "hidden";
+    const c = { v: 0 };
+    const tl = gsap.timeline();
+
+    tl.to(c, {
+      v: 100,
+      duration: 2,
+      ease: "power2.inOut",
+      onUpdate: () => {
+        counter.current.textContent =
+          String(Math.round(c.v)).padStart(3, "0") + "%";
+        fill.current.style.height = c.v + "%";
       },
-      (ctx) => {
-        if (ctx.conditions.reduce) {
-          overlay.current.style.display = "none";
-          return;
-        }
+    });
 
-        document.body.style.overflow = "hidden";
-        const c = { v: 0 };
-        const tl = gsap.timeline();
-
-        tl.to(c, {
-          v: 100,
-          duration: 2,
-          ease: "power2.inOut",
-          onUpdate: () => {
-            counter.current.textContent =
-              String(Math.round(c.v)).padStart(3, "0") + "%";
-            fill.current.style.height = c.v + "%";
-          },
-        });
-
-        tl.add(() => {
-          document.body.style.overflow = "";
-          overlay.current.style.pointerEvents = "none"; // card keeps its own
-        });
-        tl.to(bg.current, { opacity: 0, duration: 0.6, ease: "power2.out" }, ">");
-        tl.to(counter.current, { opacity: 0, duration: 0.4 }, "<");
-        tl.to(
-          videoBox.current,
-          { width: END_W, height: END_H, duration: 0.9, ease: "power4.inOut" },
-          "<"
-        );
-        tl.to(
-          card.current,
-          {
-            x: anchorX(END_W),
-            y: anchorY(END_H),
-            duration: 0.9,
-            ease: "power4.inOut",
-          },
-          "<"
-        );
-        tl.set(bg.current, { display: "none" });
-        tl.to(bar.current, { opacity: 1, duration: 0.3 }, ">-0.1");
-      }
+    tl.add(() => {
+      document.body.style.overflow = "";
+      overlay.current.style.pointerEvents = "none"; // card keeps its own
+    });
+    tl.to(bg.current, { opacity: 0, duration: 0.6, ease: "power2.out" }, ">");
+    tl.to(counter.current, { opacity: 0, duration: 0.4 }, "<");
+    tl.to(
+      videoBox.current,
+      { width: END_W, height: END_H, duration: 0.9, ease: "power4.inOut" },
+      "<"
     );
+    tl.to(
+      card.current,
+      {
+        x: anchorX(END_W),
+        y: anchorY(END_H),
+        duration: 0.9,
+        ease: "power4.inOut",
+      },
+      "<"
+    );
+    tl.set(bg.current, { display: "none" });
+    tl.to(bar.current, { opacity: 1, duration: 0.3 }, ">-0.1");
   });
 
   // Once the "Work that moves the numbers" section (#work) reaches the

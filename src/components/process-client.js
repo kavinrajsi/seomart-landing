@@ -13,16 +13,13 @@ export default function ProcessClient({ headingBefore, headingAccent, headingAft
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.from("[data-process-item]", {
-          y: 40,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power3.out",
-          stagger: 0.1,
-          scrollTrigger: { trigger: grid.current, start: "top 80%" },
-        });
+      gsap.from("[data-process-item]", {
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.1,
+        scrollTrigger: { trigger: grid.current, start: "top 80%" },
       });
     },
     { scope: grid }

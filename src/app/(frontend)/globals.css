@@ -163,19 +163,3 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .hero-slide {
-    transition: none;
-  }
-  .search-caret {
-    animation: none;
-  }
-  .tick-circle,
-  .tick-check {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-}

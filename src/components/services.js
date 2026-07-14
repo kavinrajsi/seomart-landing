@@ -137,7 +137,7 @@ function ServiceBand({ band, index, isLast }) {
   const height = isLast ? "" : "min-h-[70vh] lg:min-h-[100svh]";
   return (
     <article
-      className={`stack-card mb-0 flex flex-col border-[1px] bg-card motion-safe:sticky ${height}`}
+      className={`stack-card mb-0 flex flex-col border-[1px] bg-card sticky ${height}`}
       style={{ top: `${TOP_BASE + index * HEADER_H}px` }}
     >
       <header className="flex h-16 items-center justify-between gap-4 border-b-[1px] bg-card px-6 lg:px-10">

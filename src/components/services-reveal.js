@@ -16,9 +16,7 @@ export default function ServicesReveal({ children }) {
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
-      mm.add(
-        "(max-width: 1023px) and (prefers-reduced-motion: no-preference)",
-        () => {
+      mm.add("(max-width: 1023px)", () => {
           gsap.utils.toArray(".stack-card").forEach((card) => {
             gsap.from(card, {
               y: 40,

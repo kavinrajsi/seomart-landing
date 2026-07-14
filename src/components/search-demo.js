@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Query/result groups cycled by the typing loop; the first group is fully
 // rendered on the server so the box never pops in empty. Each query surfaces
@@ -111,23 +111,10 @@ const MOVE_MS = 550; // fake cursor glide to the X (matches CSS transition)
 const PRESS_MS = 160; // X pressed state before the instant clear
 const CLEAR_GAP_MS = 450; // empty beat after clear before next query types
 
-const MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-function subscribeToMotionPreference(callback) {
-  const mq = window.matchMedia(MOTION_QUERY);
-  mq.addEventListener("change", callback);
-  return () => mq.removeEventListener("change", callback);
-}
-
 export default function SearchDemo() {
   const [pairIndex, setPairIndex] = useState(0);
   const [text, setText] = useState(pairs[0].query);
   const [phase, setPhase] = useState("hold"); // typing | hold | moving | clearing
-  const reducedMotion = useSyncExternalStore(
-    subscribeToMotionPreference,
-    () => window.matchMedia(MOTION_QUERY).matches,
-    () => false
-  );
 
   const containerRef = useRef(null);
   const closeRef = useRef(null);
@@ -172,7 +159,6 @@ export default function SearchDemo() {
   }, [closePos]);
 
   useEffect(() => {
-    if (reducedMotion) return;
     const query = pairs[pairIndex].query;
     let timer;
 
@@ -205,14 +191,13 @@ export default function SearchDemo() {
 
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, text, pairIndex, reducedMotion]);
+  }, [phase, text, pairIndex]);
 
   const active = pairs[pairIndex];
   const showResult =
-    reducedMotion ||
-    ((phase === "typing" && text === active.query) ||
-      phase === "hold" ||
-      phase === "moving");
+    (phase === "typing" && text === active.query) ||
+    phase === "hold" ||
+    phase === "moving";
 
   return (
     <div ref={containerRef} className="relative mx-auto w-full max-w-2xl" aria-hidden="true">
@@ -294,7 +279,7 @@ export default function SearchDemo() {
           ))}
         </div>
       </div>
-      {!reducedMotion && cursor && (
+      {cursor && (
         <span
           className="pointer-events-none absolute left-0 top-0 z-10 transition-transform duration-[550ms] ease-out"
           style={{ transform: `translate(${cursor.x}px, ${cursor.y}px)` }}

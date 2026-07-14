@@ -12,16 +12,13 @@ export default function FaqList({ faqs }) {
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.from("[data-faq-item]", {
-          y: 40,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power3.out",
-          stagger: 0.08,
-          scrollTrigger: { trigger: scope.current, start: "top 80%" },
-        });
+      gsap.from("[data-faq-item]", {
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.08,
+        scrollTrigger: { trigger: scope.current, start: "top 80%" },
       });
     },
     { scope }
