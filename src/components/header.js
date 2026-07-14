@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Button from "./button";
 import Logo from "./logo";
-import { AUDIT_URL } from "@/lib/constants";
+import { useAudit } from "./audit-provider";
 
 // Anchor links carry a "/" prefix so navigation works from subpages
 // (e.g. policy pages) as well as the home page.
@@ -23,6 +23,7 @@ export default function Header() {
   const [activeId, setActiveId] = useState("");
   const [dark, setDark] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const { openAudit } = useAudit();
 
   // Hide on scroll down, reveal on scroll up. Always show near the top.
   useEffect(() => {
@@ -115,7 +116,7 @@ export default function Header() {
             <Logo className="h-5 w-auto lg:h-6" />
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+          <nav className="group/nav hidden items-center gap-1 lg:flex" aria-label="Main">
             {links.map((l) => {
               const active = activeId === anchorId(l.href);
               return (
@@ -123,7 +124,7 @@ export default function Header() {
                   key={l.href}
                   href={l.href}
                   aria-current={active ? "true" : undefined}
-                  className={`rounded-lg px-4 py-2 text-base font-medium transition-colors ${
+                  className={`rounded-lg px-4 py-2 text-base font-medium transition group-hover/nav:opacity-80 hover:!opacity-100 ${
                     active
                       ? dark
                         ? "border-[1px] bg-primary-foreground text-primary"
@@ -141,9 +142,7 @@ export default function Header() {
 
           <div className="hidden lg:block">
             <Button
-              href={AUDIT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={openAudit}
               variant={dark ? "inverted" : "primary"}
             >
               Book a Free Audit
@@ -212,13 +211,13 @@ export default function Header() {
               })}
             </nav>
             <Button
-              href={AUDIT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               variant={dark ? "inverted" : "primary"}
               size="lg"
               className="w-full"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setOpen(false);
+                openAudit();
+              }}
               >
                 Book a Free Audit
               </Button>

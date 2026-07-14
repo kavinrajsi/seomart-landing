@@ -1,9 +1,8 @@
 import type { Field } from 'payload'
 
 /**
- * Shared fields for a section header: a three-part heading. The middle part
- * (`headingAccent`) is wrapped in the serif-accent styling by the component;
- * before/after are plain. Parts are joined with a single space when rendered.
+ * Shared fields for a section header: a three-part heading (before + accent +
+ * after). Parts are joined with a single space when rendered.
  */
 export const sectionHeadingFields = ({
   headingBefore,

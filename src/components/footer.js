@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "./logo";
+import CookieSettingsButton from "./cookie-settings-button";
 
 const links = [
   { href: "/", label: "Home" },
@@ -30,7 +31,7 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="font-mono text-xs uppercase text-primary-foreground/60 hover:text-primary-foreground"
+                className="font-mono text-xs uppercase text-primary-foreground/80 hover:text-primary-foreground"
               >
                 {link.label}
               </Link>
@@ -46,13 +47,14 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="font-mono text-[11px] uppercase text-primary-foreground/50 hover:text-primary-foreground"
+                className="font-mono text-[11px] uppercase text-primary-foreground/80 hover:text-primary-foreground"
               >
                 {link.label}
               </Link>
             ))}
+            <CookieSettingsButton className="font-mono text-[11px] uppercase text-primary-foreground/80 hover:text-primary-foreground" />
           </nav>
-          <p className="text-center font-mono text-[11px] uppercase text-primary-foreground/50">
+          <p className="text-center font-mono text-[11px] uppercase text-primary-foreground/80">
             © {new Date().getFullYear()} SearchMadarth®. All rights reserved.
           </p>
         </div>

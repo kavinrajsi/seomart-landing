@@ -27,7 +27,7 @@ export default async function Testimonials() {
     <section className="mx-4 pb-10 lg:pb-30">
       <div className="mx-auto max-w-6xl border-t pt-10 lg:pt-16">
         <h2 className="mb-4 max-w-3xl text-4xl font-semibold sm:text-5xl lg:text-6xl">
-          Businesses that took the <span className="serif-accent">leap</span>.
+          Businesses that took the leap.
         </h2>
         <p className="mb-12 max-w-screen-md text-lg text-muted-foreground">
           Real owners. Real results. Measured in revenue, not vanity metrics.

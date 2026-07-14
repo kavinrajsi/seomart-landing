@@ -45,7 +45,7 @@ export default async function CaseStudies() {
 
             className="mb-4 max-w-3xl text-4xl font-semibold sm:text-5xl lg:text-6xl"
           >
-            Work that moves the <span className="serif-accent">numbers</span>.
+            Work that moves the numbers.
           </h2>
           <p className="mb-12 max-w-screen-md text-lg text-muted-foreground">
             A few of the brands we have helped grow through search, performance,

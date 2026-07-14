@@ -1,4 +1,8 @@
 import { Anek_Tamil } from "next/font/google";
+import Preloader from "@/components/preloader";
+import AuditProvider from "@/components/audit-provider";
+import CookieConsent from "@/components/cookie-consent";
+import Analytics from "@/components/analytics";
 import "./globals.css";
 
 const anekTamil = Anek_Tamil({
@@ -76,7 +80,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={anekTamil.variable}>
-      <body>{children}</body>
+      <body>
+        <Preloader />
+        <AuditProvider>{children}</AuditProvider>
+        <CookieConsent />
+        <Analytics />
+      </body>
     </html>
   );
 }

@@ -1,7 +1,5 @@
-import Button from "./button";
-import CalButton from "./cal-button";
+import AuditButton from "./audit-button";
 import ArrowIcon from "./arrow-icon";
-import { AUDIT_URL } from "@/lib/constants";
 
 export default function FinalCta() {
   return (
@@ -11,7 +9,7 @@ export default function FinalCta() {
 
           className="mb-6 max-w-4xl text-4xl font-semibold sm:text-5xl lg:text-7xl"
         >
-          Ready to <span className="serif-accent">grow</span> your business
+          Ready to grow your business
           online?
         </h2>
         <p className="mb-10 max-w-xl text-lg text-primary-foreground/70">
@@ -19,12 +17,12 @@ export default function FinalCta() {
           delivers measurable results.
         </p>
         <div className="flex flex-col items-center gap-3 sm:flex-row">
-          <CalButton variant="inverted" size="lg">
-            Book a Free Consultation
-          </CalButton>
-          <Button href={AUDIT_URL} target="_blank" rel="noopener noreferrer" variant="ghost-light" size="lg" className="gap-2">
-            Get a Free Audit <ArrowIcon />
-          </Button>
+          <AuditButton variant="inverted" size="lg">
+            Book a Free Audit
+          </AuditButton>
+          <AuditButton variant="ghost-light" size="lg" className="gap-2">
+            Run My SEO Audit <ArrowIcon />
+          </AuditButton>
         </div>
       </div>
     </section>

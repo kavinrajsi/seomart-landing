@@ -11,6 +11,7 @@ import { Media } from './src/collections/Media'
 import { CaseStudies } from './src/collections/CaseStudies'
 import { Testimonials } from './src/collections/Testimonials'
 import { Clients } from './src/collections/Clients'
+import { Leads } from './src/collections/Leads'
 import { Hero } from './src/globals/Hero'
 import { Stats } from './src/globals/Stats'
 import { Services } from './src/globals/Services'
@@ -30,7 +31,7 @@ export default buildConfig({
     },
   },
   editor: lexicalEditor(),
-  collections: [Users, Media, CaseStudies, Testimonials, Clients],
+  collections: [Users, Media, CaseStudies, Testimonials, Clients, Leads],
   globals: [Hero, Stats, Services, Industries, Process, Offer, Why, Faq],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

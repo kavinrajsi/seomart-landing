@@ -51,18 +51,46 @@
   }
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
   a,
   button,
   [role="button"],
   summary {
     cursor: pointer;
+  }
+  /* Normalize form controls so they render identically across browsers
+     (strip Safari/WebKit native chrome; Tailwind utilities still win). */
+  input,
+  textarea,
+  select {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    background-color: transparent;
+    font: inherit;
+    color: inherit;
+  }
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button {
+    -webkit-appearance: none;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  ::placeholder {
+    color: var(--muted-foreground);
+    opacity: 1;
   }
 }
 
@@ -118,6 +146,23 @@
   transition: opacity 1.2s ease;
 }
 
+/* Audit form success tick — draws the circle then the check */
+.tick-circle {
+  stroke-dasharray: 151;
+  stroke-dashoffset: 151;
+  animation: tick-draw 0.5s ease-out forwards;
+}
+.tick-check {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: tick-draw 0.35s ease-out 0.42s forwards;
+}
+@keyframes tick-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -127,5 +172,10 @@
   }
   .search-caret {
     animation: none;
+  }
+  .tick-circle,
+  .tick-check {
+    animation: none;
+    stroke-dashoffset: 0;
   }
 }

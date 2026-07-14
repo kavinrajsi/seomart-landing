@@ -72,6 +72,7 @@ export interface Config {
     'case-studies': CaseStudy;
     testimonials: Testimonial;
     clients: Client;
+    leads: Lead;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     clients: ClientsSelect<false> | ClientsSelect<true>;
+    leads: LeadsSelect<false> | LeadsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -294,6 +296,52 @@ export interface Client {
   createdAt: string;
 }
 /**
+ * Audit form submissions. Read-only record — do not edit.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leads".
+ */
+export interface Lead {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  message?: string | null;
+  /**
+   * Attribution captured at submit time.
+   */
+  tracking?: {
+    pageUrl?: string | null;
+    referrer?: string | null;
+    ip?: string | null;
+    userAgent?: string | null;
+    utmSource?: string | null;
+    utmMedium?: string | null;
+    utmCampaign?: string | null;
+    utmTerm?: string | null;
+    utmContent?: string | null;
+    gclid?: string | null;
+    wbraid?: string | null;
+    gbraid?: string | null;
+    fbclid?: string | null;
+    msclkid?: string | null;
+    /**
+     * All query params present at submit (catch-all).
+     */
+    params?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -336,6 +384,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'clients';
         value: number | Client;
+      } | null)
+    | ({
+        relationTo: 'leads';
+        value: number | Lead;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -463,6 +515,37 @@ export interface ClientsSelect<T extends boolean = true> {
   name?: T;
   logo?: T;
   order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "leads_select".
+ */
+export interface LeadsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  phone?: T;
+  message?: T;
+  tracking?:
+    | T
+    | {
+        pageUrl?: T;
+        referrer?: T;
+        ip?: T;
+        userAgent?: T;
+        utmSource?: T;
+        utmMedium?: T;
+        utmCampaign?: T;
+        utmTerm?: T;
+        utmContent?: T;
+        gclid?: T;
+        wbraid?: T;
+        gbraid?: T;
+        fbclid?: T;
+        msclkid?: T;
+        params?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
