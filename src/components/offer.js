@@ -1,4 +1,5 @@
 import Button from "./button";
+import ArrowIcon from "./arrow-icon";
 import { AUDIT_URL } from "@/lib/constants";
 
 const offers = [
@@ -95,8 +96,9 @@ export default function Offer() {
                   <Button
                     variant={offer.featured ? "ghost-light" : "ghost"}
                     size="lg"
+                    className="gap-2"
                   >
-                    {offer.cta} →
+                    {offer.cta} <ArrowIcon />
                   </Button>
                 </a>
               </div>

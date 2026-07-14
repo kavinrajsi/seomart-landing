@@ -1,4 +1,5 @@
 import Button from "./button";
+import ArrowIcon from "./arrow-icon";
 import { AUDIT_URL, PHONE } from "@/lib/constants";
 
 function Icon({ path, size = 24, className = "" }) {
@@ -303,9 +304,9 @@ export default function Services() {
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Get Free Growth Audit →</Button>
-            <Button href={`tel:${PHONE}`} variant="outline">
-              Book a Consultation →
+            <Button href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className="gap-2">Get Free Growth Audit <ArrowIcon /></Button>
+            <Button href={`tel:${PHONE}`} variant="outline" className="gap-2">
+              Book a Consultation <ArrowIcon />
             </Button>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import Button from "./button";
 import CalButton from "./cal-button";
+import ArrowIcon from "./arrow-icon";
 import { AUDIT_URL } from "@/lib/constants";
 
 export default function FinalCta() {
@@ -21,8 +22,8 @@ export default function FinalCta() {
           <CalButton variant="inverted" size="lg">
             Book a Free Consultation
           </CalButton>
-          <Button href={AUDIT_URL} target="_blank" rel="noopener noreferrer" variant="ghost-light" size="lg">
-            Get a Free Audit →
+          <Button href={AUDIT_URL} target="_blank" rel="noopener noreferrer" variant="ghost-light" size="lg" className="gap-2">
+            Get a Free Audit <ArrowIcon />
           </Button>
         </div>
       </div>
