@@ -1,20 +1,4 @@
-// Testimonials sourced from sme.searchmadarth.com
-const testimonials = [
-  {
-    quote:
-      "We've partnered with Madarth for our website, SEO, and digital advertising at Indicus Paints. What stands out is their integrity, transparency, and commitment to results. They deliver on what they promise and consistently go beyond the brief with valuable ideas and insights. It's a partnership built on trust and a genuine focus on growth.",
-    name: "B. Gokul",
-    role: "Partner, VNC Group",
-    initials: "BG",
-  },
-  {
-    quote:
-      "As Veranda IAS's digital marketing partner, Madarth has played a key role in expanding our reach, strengthening brand visibility, and generating quality leads. Their strategic approach, data-driven execution, proactive communication, and deep understanding of the education sector have consistently delivered strong results and made them a trusted growth partner.",
-    name: "Business Head",
-    role: "Veranda IAS",
-    initials: "VI",
-  },
-];
+import { getTestimonials } from "@/lib/payload";
 
 function Stars() {
   return (
@@ -35,20 +19,17 @@ function Stars() {
   );
 }
 
-export default function Testimonials() {
+export default async function Testimonials() {
+  const testimonials = await getTestimonials();
+  if (!testimonials.length) return null;
+
   return (
     <section className="mx-4 pb-10 lg:pb-30">
       <div className="mx-auto max-w-6xl border-t-[4px] pt-10 lg:pt-16">
-        <p
-
-          className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground"
-        >
+        <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
           Testimonials
         </p>
-        <h2
-
-          className="mb-4 max-w-3xl text-4xl font-semibold sm:text-5xl lg:text-6xl"
-        >
+        <h2 className="mb-4 max-w-3xl text-4xl font-semibold sm:text-5xl lg:text-6xl">
           Businesses that took the <span className="serif-accent">leap</span>.
         </h2>
         <p className="mb-12 max-w-screen-md text-lg text-muted-foreground">
@@ -57,7 +38,7 @@ export default function Testimonials() {
         <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-2">
           {testimonials.map((testimonial) => (
             <figure
-              key={testimonial.name}
+              key={testimonial.id ?? testimonial.name}
               className="group flex flex-col justify-between bg-background p-8 transition-colors hover:bg-card lg:p-10"
             >
               <div>

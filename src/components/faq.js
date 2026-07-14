@@ -1,46 +1,24 @@
 import FaqList from "./faq-list";
+import AccentHeading from "./accent-heading";
+import { getFaq } from "@/lib/payload";
 
-// TODO: review drafted answers with the team
-// Exported for the FAQPage JSON-LD in structured-data.js — schema content
-// must exactly match the FAQ rendered on the page.
-export const faqs = [
-  {
-    q: "How long does SEO take?",
-    a: "Most sites see early movement in 8–12 weeks, with meaningful ranking and traffic gains in 4–6 months. Timelines depend on your starting point, competition, and how quickly technical and content fixes go live. We share a milestone roadmap upfront so you always know what to expect.",
-  },
-  {
-    q: "What budget is required for Google Ads?",
-    a: "There is no fixed minimum — budgets are built backwards from your target cost per lead and market competition. We typically recommend starting with a test budget for the first month, then scaling what converts. You get full visibility into where every rupee goes.",
-  },
-  {
-    q: "Can you redesign my website without affecting rankings?",
-    a: "Yes. We follow an SEO-safe migration process: full URL mapping, redirect planning, content parity checks, and pre/post-launch monitoring, so your existing rankings and traffic are protected during the revamp.",
-  },
-  {
-    q: "Do you provide monthly reporting?",
-    a: "Yes. Every engagement includes a monthly report covering rankings, traffic, leads, and spend, plus a review call to walk through results and the plan for the next month.",
-  },
-  {
-    q: "Which industries do you specialise in?",
-    a: "We have deep experience across manufacturing, education, fashion and jewellery, real estate, banking and financial services, retail, logistics, healthcare, and SMEs and startups.",
-  },
-];
+export default async function Faq() {
+  const data = await getFaq();
+  if (!data) return null;
+  const faqs = data.items ?? [];
 
-export default function Faq() {
   return (
     <section id="faq" className="mx-4 scroll-mt-24 pb-10 lg:pb-30">
       <div className="mx-auto max-w-6xl border-t-[4px] pt-10 lg:pt-16">
-        <p
-
-          className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground"
-        >
-          FAQ
+        <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
+          {data.eyebrow}
         </p>
-        <h2
-
-          className="mb-12 max-w-3xl text-4xl font-semibold sm:text-5xl lg:mb-16 lg:text-6xl"
-        >
-          Frequently asked <span className="serif-accent">questions</span>.
+        <h2 className="mb-12 max-w-3xl text-4xl font-semibold sm:text-5xl lg:mb-16 lg:text-6xl">
+          <AccentHeading
+            before={data.headingBefore}
+            accent={data.headingAccent}
+            after={data.headingAfter}
+          />
         </h2>
         <FaqList faqs={faqs} />
       </div>

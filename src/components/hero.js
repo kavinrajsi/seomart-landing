@@ -1,32 +1,41 @@
 import Button from "./button";
 import SearchDemo from "./search-demo";
-import { AUDIT_URL } from "@/lib/constants";
+import { getHero } from "@/lib/payload";
 
-export default function Hero() {
+const externalProps = (href) =>
+  href && /^https?:\/\//.test(href)
+    ? { target: "_blank", rel: "noopener noreferrer" }
+    : {};
+
+export default async function Hero() {
+  const data = await getHero();
+  if (!data) return null;
+
   return (
     <section className="mx-4 pt-36 pb-10 lg:pt-44 lg:pb-20">
       <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
-        <h1
-
-          className="mb-8 max-w-screen-md text-4xl font-semibold text-pretty lg:text-7xl"
-        >
-          We Search. We Build. We Grow Your Business.
+        <h1 className="mb-8 max-w-screen-md text-4xl font-semibold text-pretty lg:text-7xl">
+          {data.headline}
         </h1>
-        <p
-
-          className="mb-10 max-w-screen-md text-lg text-muted-foreground lg:text-xl"
-        >
-          At Search Madarth® combines search strategy, paid performance,
-          standout design, and performance-first web development, all under one
-          roof, all built for real results.
+        <p className="mb-10 max-w-screen-md text-lg text-muted-foreground lg:text-xl">
+          {data.subhead}
         </p>
         <div className="mb-14 flex flex-col gap-3 sm:flex-row">
-          <Button href="#services" size="lg">
-            Explore Our Services
-          </Button>
-          <Button href={AUDIT_URL} target="_blank" rel="noopener noreferrer" variant="outline" size="lg">
-            Book a Free Audit
-          </Button>
+          {data.primaryCtaLabel && (
+            <Button href={data.primaryCtaHref} size="lg" {...externalProps(data.primaryCtaHref)}>
+              {data.primaryCtaLabel}
+            </Button>
+          )}
+          {data.secondaryCtaLabel && (
+            <Button
+              href={data.secondaryCtaHref}
+              variant="outline"
+              size="lg"
+              {...externalProps(data.secondaryCtaHref)}
+            >
+              {data.secondaryCtaLabel}
+            </Button>
+          )}
         </div>
         <div className="w-full">
           <SearchDemo />

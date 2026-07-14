@@ -1,4 +1,4 @@
-import { getCaseStudies } from "@/lib/sanity";
+import { getCaseStudies } from "@/lib/payload";
 import CaseStudiesClient from "./case-studies-client";
 
 // Static fallback if Sanity is unreachable or env vars are missing
