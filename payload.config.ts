@@ -43,27 +43,26 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-    // Only route uploads to Cloudflare R2 (S3-compatible) when credentials are
-    // present. Locally, without them, Payload falls back to its default on-disk
-    // storage so dev works with no cloud dependency. Production must set them,
-    // since serverless has no persistent filesystem.
-    ...(process.env.R2_BUCKET && process.env.R2_ENDPOINT
-      ? [
-          s3Storage({
-            collections: {
-              media: true,
-            },
-            bucket: process.env.R2_BUCKET,
-            config: {
-              endpoint: process.env.R2_ENDPOINT,
-              region: 'auto',
-              credentials: {
-                accessKeyId: process.env.R2_ACCESS_KEY_ID || '',
-                secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || '',
-              },
-            },
-          }),
-        ]
-      : []),
+    // Route uploads to Cloudflare R2 (S3-compatible). The plugin is always
+    // registered (so the admin importMap deterministically includes the S3
+    // client handler regardless of env), but only `enabled` when R2 creds are
+    // present. Without them it deactivates and Payload falls back to on-disk
+    // storage for local dev. Production must set the R2 env vars, since
+    // serverless has no persistent filesystem.
+    s3Storage({
+      enabled: Boolean(process.env.R2_BUCKET && process.env.R2_ENDPOINT),
+      collections: {
+        media: true,
+      },
+      bucket: process.env.R2_BUCKET || '',
+      config: {
+        endpoint: process.env.R2_ENDPOINT || '',
+        region: 'auto',
+        credentials: {
+          accessKeyId: process.env.R2_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || '',
+        },
+      },
+    }),
   ],
 })
