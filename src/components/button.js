@@ -8,7 +8,7 @@ const variants = {
   ghost:
     "rounded-lg border border-current bg-transparent text-current font-mono text-xs font-medium uppercase tracking-[0.15em] hover:bg-foreground/5 focus-visible:ring-ring",
   "ghost-light":
-    "rounded-lg border border-white/60 bg-transparent text-white font-mono text-xs font-medium uppercase tracking-[0.15em] hover:bg-white/10 focus-visible:ring-white",
+    "rounded-lg border border-current bg-transparent text-current font-mono text-xs font-medium uppercase tracking-[0.15em] hover:bg-foreground/5 focus-visible:ring-ring",
 };
 
 export default function Button({

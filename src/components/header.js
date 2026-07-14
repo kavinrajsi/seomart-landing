@@ -128,7 +128,7 @@ export default function Header() {
                         ? "bg-primary-foreground text-primary"
                         : "border-[4px] bg-primary text-primary-foreground"
                       : dark
-                        ? "text-primary-foreground/70 hover:bg-white/10 hover:text-primary-foreground"
+                        ? "text-primary-foreground/70 hover:bg-foreground/10 hover:text-primary-foreground"
                         : "border-[4px] text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
@@ -151,7 +151,7 @@ export default function Header() {
 
           <button
             className={`rounded-lg p-2 lg:hidden ${
-              dark ? "hover:bg-white/10" : "hover:bg-muted"
+              dark ? "hover:bg-foreground/10" : "hover:bg-muted"
             }`}
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}
@@ -179,7 +179,7 @@ export default function Header() {
           <div
             className={`fixed inset-x-4 top-[84px] bottom-0 z-[60] flex flex-col rounded-lg border-[4px] p-4 shadow-2xl transition-colors duration-300 lg:hidden ${
               dark
-                ? "border-white/15 bg-primary text-primary-foreground"
+                ? "border-foreground/15 bg-primary text-primary-foreground"
                 : "border-black/10 bg-background text-foreground"
             }`}
           >
@@ -200,7 +200,7 @@ export default function Header() {
                           ? "bg-primary-foreground text-primary"
                           : "bg-primary text-primary-foreground"
                         : dark
-                          ? "hover:bg-white/10"
+                          ? "hover:bg-foreground/10"
                           : "hover:bg-muted"
                     }`}
                     onClick={() => setOpen(false)}
