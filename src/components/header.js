@@ -176,13 +176,16 @@ export default function Header() {
 
         {open && (
           <div
-            className={`mx-auto mt-2 max-w-6xl rounded-2xl border p-4 shadow-lg backdrop-blur-xl backdrop-saturate-150 transition-colors duration-300 lg:hidden ${
+            className={`fixed inset-x-4 top-[84px] bottom-0 z-[60] flex flex-col rounded-2xl border p-4 shadow-2xl transition-colors duration-300 lg:hidden ${
               dark
-                ? "border-white/15 bg-primary/70 text-primary-foreground"
-                : "border-white/40 bg-background/70 text-foreground"
+                ? "border-white/15 bg-primary text-primary-foreground"
+                : "border-black/10 bg-background text-foreground"
             }`}
           >
-            <nav className="flex flex-col" aria-label="Mobile">
+            <nav
+              className="flex flex-1 flex-col justify-center gap-1"
+              aria-label="Mobile"
+            >
               {links.map((l) => {
                 const active = activeId === anchorId(l.href);
                 return (
@@ -190,7 +193,7 @@ export default function Header() {
                     key={l.href}
                     href={l.href}
                     aria-current={active ? "true" : undefined}
-                    className={`rounded-md px-3 py-3 text-base font-medium ${
+                    className={`rounded-lg px-4 py-4 text-2xl font-medium ${
                       active
                         ? dark
                           ? "bg-primary-foreground text-primary"
@@ -205,17 +208,18 @@ export default function Header() {
                   </a>
                 );
               })}
-              <Button
-                href="https://superengine.vercel.app/?utm_source=searchmadarth&utm_medium=website&utm_campaign=free_audit"
-                target="_blank"
-                rel="noopener noreferrer"
-                variant={dark ? "inverted" : "primary"}
-                className="mt-3"
-                onClick={() => setOpen(false)}
+            </nav>
+            <Button
+              href="https://superengine.vercel.app/?utm_source=searchmadarth&utm_medium=website&utm_campaign=free_audit"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant={dark ? "inverted" : "primary"}
+              size="lg"
+              className="w-full"
+              onClick={() => setOpen(false)}
               >
                 Book a Free Audit
               </Button>
-            </nav>
           </div>
         )}
       </div>

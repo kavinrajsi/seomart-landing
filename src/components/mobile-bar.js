@@ -5,7 +5,7 @@ export default function MobileBar() {
         href="tel:+918667767447"
         className="block w-full px-8 py-4 text-center text-base font-semibold"
       >
-        Call us
+        Call Us
       </a>
     </div>
   );

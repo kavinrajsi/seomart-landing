@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { PortableText } from "@portabletext/react";
 
 const components = {
@@ -74,6 +74,23 @@ const components = {
 
 export default function CaseStudyDrawer({ study, onClose }) {
   const open = Boolean(study);
+  const [cached, setCached] = useState(study);
+  const [mounted, setMounted] = useState(open);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (study) {
+      setCached(study);
+      setMounted(true);
+      const raf = requestAnimationFrame(() =>
+        requestAnimationFrame(() => setVisible(true))
+      );
+      return () => cancelAnimationFrame(raf);
+    }
+    setVisible(false);
+    const t = setTimeout(() => setMounted(false), 300);
+    return () => clearTimeout(t);
+  }, [study]);
 
   useEffect(() => {
     if (!open) return;
@@ -86,22 +103,28 @@ export default function CaseStudyDrawer({ study, onClose }) {
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex">
+    <div className={`fixed inset-0 z-50 flex ${visible ? "" : "pointer-events-none"}`}>
       {/* Backdrop — click closes */}
       <button
         type="button"
         aria-label="Close case study"
         onClick={onClose}
-        className="absolute inset-0 cursor-default bg-black/50"
+        className={`absolute inset-0 cursor-default bg-black/50 transition-opacity duration-300 ${
+          visible ? "opacity-100" : "opacity-0"
+        }`}
       />
       <aside
         role="dialog"
         aria-modal="true"
-        aria-label={study.client}
-        className="relative ml-auto h-full w-[80%] overflow-y-auto bg-background shadow-2xl"
+        aria-label={cached.client}
+        className={`fixed inset-x-0 bottom-0 z-10 h-[90vh] w-full overflow-y-auto bg-background shadow-2xl transition-transform duration-300 ease-out lg:inset-y-0 lg:right-0 lg:left-auto lg:top-0 lg:bottom-auto lg:h-screen lg:w-full lg:max-w-[768px] ${
+          visible
+            ? "translate-y-0 lg:translate-x-0"
+            : "translate-y-full lg:translate-y-0 lg:translate-x-full"
+        }`}
       >
         <button
           type="button"
@@ -123,11 +146,11 @@ export default function CaseStudyDrawer({ study, onClose }) {
           </svg>
         </button>
 
-        {(study.cover ?? study.image) && (
+        {(cached.cover ?? cached.image) && (
           <div className="aspect-video w-full overflow-hidden bg-muted">
             <img
-              src={study.cover ?? study.image}
-              alt={study.alt ?? study.client}
+              src={cached.cover ?? cached.image}
+              alt={cached.alt ?? cached.client}
               className="h-full w-full object-cover object-center"
             />
           </div>
@@ -135,14 +158,14 @@ export default function CaseStudyDrawer({ study, onClose }) {
 
         <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10 lg:py-14">
           <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
-            {study.tag}
+            {cached.tag}
           </p>
           <h2 className="mb-8 text-3xl font-semibold sm:text-4xl lg:text-5xl">
-            {study.client}
+            {cached.client}
           </h2>
 
-          {study.sections?.length ? (
-            study.sections.map((s) => (
+          {cached.sections?.length ? (
+            cached.sections.map((s) => (
               <section key={s._key}>
                 {s.content && (
                   <PortableText value={s.content} components={components} />
@@ -161,7 +184,7 @@ export default function CaseStudyDrawer({ study, onClose }) {
             ))
           ) : (
             <p className="text-base leading-normal text-muted-foreground">
-              {study.summary}
+              {cached.summary}
             </p>
           )}
         </div>
