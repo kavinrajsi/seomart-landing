@@ -1,34 +1,7 @@
 import Button from "./button";
 import ArrowIcon from "./arrow-icon";
-import { AUDIT_URL } from "@/lib/constants";
-
-const offers = [
-  {
-    title: "Get a Free Digital Growth Audit",
-    items: [
-      "Digital Health Score",
-      "Gap Analysis Report",
-      "Estimated Revenue Opportunity",
-      "Competitor Benchmarking",
-      "Personalised 90-Day Growth Roadmap",
-    ],
-    cta: "Claim Your Free Audit",
-    href: AUDIT_URL,
-    featured: true,
-  },
-  {
-    title: "AI Powered SEO Audit",
-    items: [
-      "Website Audit",
-      "Detailed SEO Analysis & Fixes",
-      "Keyword Opportunities",
-      "90-Day Growth Roadmap",
-    ],
-    cta: "Run My SEO Audit",
-    href: AUDIT_URL,
-    featured: false,
-  },
-];
+import AccentHeading from "./accent-heading";
+import { getOffer } from "@/lib/payload";
 
 function Check() {
   return (
@@ -49,26 +22,28 @@ function Check() {
   );
 }
 
-export default function Offer() {
+export default async function Offer() {
+  const data = await getOffer();
+  if (!data) return null;
+  const offers = data.offers ?? [];
+
   return (
     <section id="offer" className="mx-4 scroll-mt-24 pb-10 lg:pb-30">
       <div className="mx-auto max-w-6xl border-t-[4px] pt-10 lg:pt-16">
-        <p
-
-          className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground"
-        >
-          Strong Offer
+        <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
+          {data.eyebrow}
         </p>
-        <h2
-
-          className="mb-12 max-w-3xl text-4xl font-semibold sm:text-5xl lg:mb-16 lg:text-6xl"
-        >
-          Start with a <span className="serif-accent">free</span> audit.
+        <h2 className="mb-12 max-w-3xl text-4xl font-semibold sm:text-5xl lg:mb-16 lg:text-6xl">
+          <AccentHeading
+            before={data.headingBefore}
+            accent={data.headingAccent}
+            after={data.headingAfter}
+          />
         </h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {offers.map((offer) => (
             <div
-              key={offer.title}
+              key={offer.id ?? offer.title}
               className={`flex flex-col p-8 lg:p-10 ${
                 offer.featured
                   ? "bg-primary text-primary-foreground"
@@ -79,10 +54,10 @@ export default function Offer() {
                 {offer.title}
               </h3>
               <ul className="mb-10 flex flex-col gap-3">
-                {offer.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-base">
+                {(offer.items ?? []).map((item) => (
+                  <li key={item.id ?? item.text} className="flex items-start gap-2 text-base">
                     <Check />
-                    {item}
+                    {item.text}
                   </li>
                 ))}
               </ul>

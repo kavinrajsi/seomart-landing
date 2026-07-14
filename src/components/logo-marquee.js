@@ -1,30 +1,4 @@
-// Logo files live in /public/logo; brands without a file render as text
-// wordmarks until their logo arrives.
-const LOGO_DIR = "/logo";
-
-const clients = [
-  { name: "Indicus Paints", logo: `${LOGO_DIR}/indicus.png` },
-  { name: "KVB", logo: `${LOGO_DIR}/karur-vysya-bank.png` },
-  { name: "TAFE Tribe", logo: `${LOGO_DIR}/tafe-tribe.png` },
-  { name: "Super Kings Academy", logo: `${LOGO_DIR}/csk.png` },
-  { name: "NAC Jewellers", logo: `${LOGO_DIR}/nac-jewellers.png` },
-  { name: "Veranda IAS", logo: `${LOGO_DIR}/veranda-ias.png` },
-  { name: "Dahnay", logo: `${LOGO_DIR}/dahnay.png` },
-  { name: "Visvas", logo: `${LOGO_DIR}/visvas.png` },
-  { name: "Nithya Amirtham", logo: `${LOGO_DIR}/nithya-amirtham.png` },
-  { name: "Inspace India", logo: `${LOGO_DIR}/inspace.png` },
-  { name: "Inspace Store", logo: `${LOGO_DIR}/inspace-store.png` },
-  { name: "Irezumi", logo: `${LOGO_DIR}/irezumi.png` },
-  { name: "Astrazeneca", logo: `${LOGO_DIR}/astrazeneca.png` },
-  { name: "Sundari Silks", logo: `${LOGO_DIR}/sundari-silks.png` },
-  { name: "Annapoorna Masalas", logo: `${LOGO_DIR}/annpoorna-masala.png` },
-  { name: "Frankfinn", logo: `${LOGO_DIR}/frankfinn.png` },
-  { name: "Mylapore Times", logo: `${LOGO_DIR}/myalpore-times.png` },
-  { name: "Mandela", logo: `${LOGO_DIR}/mandela.png` },
-];
-
-const rowOne = clients.slice(0, 9);
-const rowTwo = clients.slice(9);
+import { getClients } from "@/lib/payload";
 
 function ClientMark({ client }) {
   if (client.logo) {
@@ -61,7 +35,14 @@ function MarqueeRow({ items, reverse = false }) {
   );
 }
 
-export default function LogoMarquee() {
+export default async function LogoMarquee() {
+  const clients = await getClients();
+  if (!clients.length) return null;
+
+  const half = Math.ceil(clients.length / 2);
+  const rowOne = clients.slice(0, half);
+  const rowTwo = clients.slice(half);
+
   return (
     <section className="py-14 lg:py-24">
       <p className="mb-10 text-center font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">

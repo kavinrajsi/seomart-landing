@@ -1,76 +1,75 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PortableText } from "@portabletext/react";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 
-const components = {
-  block: {
-    normal: ({ children }) => (
-      <p className="mb-4 text-base leading-normal text-muted-foreground">
-        {children}
-      </p>
-    ),
-    h2: ({ children }) => (
-      <h3 className="mb-4 mt-10 text-2xl font-semibold lg:text-3xl">
-        {children}
-      </h3>
-    ),
-    h3: ({ children }) => (
-      <h4 className="mb-3 mt-8 text-xl font-semibold">{children}</h4>
-    ),
-    h4: ({ children }) => (
-      <h5 className="mb-2 mt-6 text-lg font-semibold">{children}</h5>
-    ),
-    blockquote: ({ children }) => (
+// Heading levels are downshifted one step (H2→h3, etc.) so the drawer's own
+// <h2> title stays the top of the outline, matching the previous Portable Text
+// renderer.
+const HEADING_STYLES = {
+  h2: "mb-4 mt-10 text-2xl font-semibold lg:text-3xl",
+  h3: "mb-3 mt-8 text-xl font-semibold",
+  h4: "mb-2 mt-6 text-lg font-semibold",
+};
+const HEADING_TAG = { h2: "h3", h3: "h4", h4: "h5" };
+
+const LIST_STYLES = {
+  bullet: "mb-4 list-disc space-y-2 pl-6 text-base leading-normal text-muted-foreground",
+  number: "mb-4 list-decimal space-y-2 pl-6 text-base leading-normal text-muted-foreground",
+};
+
+const jsxConverters = ({ defaultConverters }) => ({
+  ...defaultConverters,
+  paragraph: ({ node, nodesToJSX }) => {
+    const children = nodesToJSX({ nodes: node.children });
+    return (
+      <p className="mb-4 text-base leading-normal text-muted-foreground">{children}</p>
+    );
+  },
+  heading: ({ node, nodesToJSX }) => {
+    const children = nodesToJSX({ nodes: node.children });
+    const Tag = HEADING_TAG[node.tag] ?? node.tag;
+    const className = HEADING_STYLES[node.tag];
+    return <Tag className={className}>{children}</Tag>;
+  },
+  quote: ({ node, nodesToJSX }) => {
+    const children = nodesToJSX({ nodes: node.children });
+    return (
       <blockquote className="mb-4 border-l-[4px] pl-4 text-lg font-light leading-normal">
         {children}
       </blockquote>
-    ),
+    );
   },
-  list: {
-    bullet: ({ children }) => (
-      <ul className="mb-4 list-disc space-y-2 pl-6 text-base leading-normal text-muted-foreground">
-        {children}
-      </ul>
-    ),
-    number: ({ children }) => (
-      <ol className="mb-4 list-decimal space-y-2 pl-6 text-base leading-normal text-muted-foreground">
-        {children}
-      </ol>
-    ),
+  list: ({ node, nodesToJSX }) => {
+    const children = nodesToJSX({ nodes: node.children });
+    const Tag = node.tag;
+    return <Tag className={LIST_STYLES[node.listType]}>{children}</Tag>;
   },
-  marks: {
-    strong: ({ children }) => (
-      <strong className="font-semibold text-foreground">{children}</strong>
-    ),
-    sup: ({ children }) => <sup>{children}</sup>,
-    link: ({ children, value }) => (
+  link: ({ node, nodesToJSX }) => {
+    const children = nodesToJSX({ nodes: node.children });
+    return (
       <a
-        href={value?.href}
+        href={node.fields?.url}
         target="_blank"
         rel="noopener noreferrer"
         className="underline underline-offset-2 hover:text-foreground cursor-pointer"
       >
         {children}
       </a>
-    ),
+    );
   },
-  types: {
-    image: ({ value }) =>
-      value?.url ? (
-        <img
-          src={value.url}
-          alt={value.alt ?? ""}
-          loading="lazy"
-          className="mb-4 w-full bg-muted"
-        />
-      ) : null,
-    video: ({ value }) =>
-      value?.url ? (
-        <video src={value.url} controls className="mb-4 w-full bg-muted" />
-      ) : null,
+  upload: ({ node }) => {
+    const doc = node.value;
+    if (!doc || typeof doc !== "object" || !doc.url) return null;
+    const alt = node.fields?.alt || doc.alt || "";
+    if (doc.mimeType?.startsWith("video")) {
+      return <video src={doc.url} controls className="mb-4 w-full bg-muted" />;
+    }
+    return (
+      <img src={doc.url} alt={alt} loading="lazy" className="mb-4 w-full bg-muted" />
+    );
   },
-};
+});
 
 export default function CaseStudyDrawer({ study, onClose }) {
   const open = Boolean(study);
@@ -168,7 +167,11 @@ export default function CaseStudyDrawer({ study, onClose }) {
             cached.sections.map((section) => (
               <section key={section._key}>
                 {section.content && (
-                  <PortableText value={section.content} components={components} />
+                  <RichText
+                    data={section.content}
+                    converters={jsxConverters}
+                    disableContainer
+                  />
                 )}
                 {section.media && (
                   <figure className="my-8">

@@ -1,6 +1,8 @@
 import Button from "./button";
 import ArrowIcon from "./arrow-icon";
+import AccentHeading from "./accent-heading";
 import { AUDIT_URL, PHONE } from "@/lib/constants";
+import { getServices } from "@/lib/payload";
 
 function Icon({ path, size = 24, className = "" }) {
   return (
@@ -21,6 +23,8 @@ function Icon({ path, size = 24, className = "" }) {
   );
 }
 
+// Keep in sync with SERVICE_ICON_KEYS in src/lib/service-icons.ts — the CMS
+// stores a key, this registry maps it to the glyph.
 const glyphs = {
   search: (
     <>
@@ -106,109 +110,6 @@ const glyphs = {
   ),
 };
 
-const bands = [
-  {
-    eyebrow: "Search Optimisation Services",
-    heading: (
-      <>
-        The future-proof advantage{" "}
-        <span className="serif-accent">in search</span>.
-      </>
-    ),
-    body: "Traditional SEO alone is no longer enough. We help businesses get discovered across search engines, AI assistants, and generative search experiences.",
-    cards: [
-      {
-        icon: "search",
-        title: "Search Engine Optimisation (SEO)",
-        body: "Improve rankings, organic traffic, and lead generation through technical SEO, content strategy, local SEO, and authority building.",
-      },
-      {
-        icon: "chat",
-        title: "Answer Engine Optimisation (AEO)",
-        body: "Structure content for featured snippets, voice search, AI assistants, and conversational queries to become the preferred answer source.",
-      },
-      {
-        icon: "sparkles",
-        title: "Generative Engine Optimisation (GEO)",
-        body: "Increase brand visibility across AI platforms such as ChatGPT, Gemini, and Google AI Overviews through AI-ready content and entity optimisation.",
-      },
-      {
-        icon: "gear",
-        title: "Technical & Content Excellence",
-        body: "Schema implementation, Core Web Vitals optimisation, content hubs, internal linking, and analytics-driven improvements.",
-      },
-    ],
-  },
-  {
-    eyebrow: "Performance Marketing Services",
-    heading: (
-      <>
-        The measurable advantage{" "}
-        <span className="serif-accent">in digital growth</span>.
-      </>
-    ),
-    body: "Most agencies focus on clicks and impressions. We focus on leads, conversions, and business outcomes through continuous optimisation.",
-    cards: [
-      {
-        icon: "megaphone",
-        title: "Google Ads Management",
-        body: "Search, Display, YouTube, Shopping, and Remarketing campaigns designed to maximise return on ad spend.",
-      },
-      {
-        icon: "share",
-        title: "Meta Advertising",
-        body: "Lead generation, awareness, and conversion campaigns across Facebook and Instagram.",
-      },
-      {
-        icon: "chart",
-        title: "Conversion & Tracking",
-        body: "Complete tracking setup including GA4, GTM, Enhanced Conversions, CRM integration, and attribution reporting.",
-      },
-      {
-        icon: "layout",
-        title: "Landing Page Optimisation",
-        body: "Conversion-focused landing pages and funnel improvements to improve lead quality and reduce acquisition costs.",
-      },
-    ],
-  },
-  {
-    eyebrow: "Website Development Services",
-    heading: (
-      <>
-        The conversion advantage <span className="serif-accent">online</span>.
-      </>
-    ),
-    body: "Build fast, scalable, and SEO-ready websites designed to convert visitors into customers and grow your business.",
-    cards: [
-      {
-        icon: "globe",
-        title: "Corporate Websites",
-        body: "Professional websites that build credibility and showcase your brand effectively.",
-      },
-      {
-        icon: "layout",
-        title: "Landing Pages",
-        body: "High-converting landing pages for campaigns and lead generation.",
-      },
-      {
-        icon: "cart",
-        title: "E-commerce Development",
-        body: "Scalable e-commerce solutions that deliver seamless shopping experiences.",
-      },
-      {
-        icon: "code",
-        title: "Website Revamp & Development",
-        body: "Modern designs, better performance, and SEO-ready development for measurable results.",
-      },
-      {
-        icon: "pen",
-        title: "UI/UX Design",
-        body: "Intuitive, user-friendly designs that enhance engagement and drive conversions.",
-      },
-    ],
-  },
-];
-
 function ServiceCard({ icon, title, body }) {
   return (
     <div className="border-[4px] bg-card p-4 sm:p-5">
@@ -230,6 +131,7 @@ const HEADER_H = 64;
 const TOP_BASE = 24;
 
 function ServiceBand({ band, index }) {
+  const cards = band.cards ?? [];
   return (
     <article
       className="stack-card mb-0 flex flex-col border-[4px] bg-card min-h-[70vh] lg:min-h-[100svh] motion-safe:sticky"
@@ -245,7 +147,7 @@ function ServiceBand({ band, index }) {
           </span>
         </div>
         <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
-          {band.cards.length} services
+          {cards.length} services
         </span>
       </header>
 
@@ -253,13 +155,17 @@ function ServiceBand({ band, index }) {
         <div className="grid w-full grid-cols-1 gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>
             <h3 className="mb-5 max-w-md text-3xl font-semibold sm:text-4xl lg:text-5xl">
-              {band.heading}
+              <AccentHeading
+                before={band.headingBefore}
+                accent={band.headingAccent}
+                after={band.headingAfter}
+              />
             </h3>
             <p className="max-w-md text-lg text-muted-foreground">{band.body}</p>
           </div>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {band.cards.map((card) => (
-              <ServiceCard key={card.title} {...card} />
+            {cards.map((card) => (
+              <ServiceCard key={card.id ?? card.title} {...card} />
             ))}
           </div>
         </div>
@@ -268,32 +174,30 @@ function ServiceBand({ band, index }) {
   );
 }
 
-export default function Services() {
+export default async function Services() {
+  const data = await getServices();
+  if (!data) return null;
+  const bands = data.bands ?? [];
+
   return (
     <section id="services" className="mx-4 scroll-mt-24 pb-10 lg:pb-30">
       <div className="mx-auto max-w-6xl">
-        <p
-
-          className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground"
-        >
-          Our Services
+        <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
+          {data.eyebrow}
         </p>
-        <h2
-
-          className="mb-12 max-w-3xl text-4xl font-semibold sm:text-5xl lg:mb-16 lg:text-6xl"
-        >
-          Everything you need to <span className="serif-accent">grow</span>,
-          nothing you don&apos;t.
+        <h2 className="mb-12 max-w-3xl text-4xl font-semibold sm:text-5xl lg:mb-16 lg:text-6xl">
+          <AccentHeading
+            before={data.headingBefore}
+            accent={data.headingAccent}
+            after={data.headingAfter}
+          />
         </h2>
 
         {bands.map((band, i) => (
-          <ServiceBand key={band.eyebrow} band={band} index={i} />
+          <ServiceBand key={band.id ?? band.eyebrow} band={band} index={i} />
         ))}
 
-        <div
-
-          className="mt-4 flex flex-col gap-6 border-[4px] p-6 sm:p-8 lg:flex-row lg:items-center"
-        >
+        <div className="mt-4 flex flex-col gap-6 border-[4px] p-6 sm:p-8 lg:flex-row lg:items-center">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Icon path={glyphs.chart} size={22} />
           </div>
