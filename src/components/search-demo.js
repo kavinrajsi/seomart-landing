@@ -97,7 +97,7 @@ export default function SearchDemo() {
             <circle cx="11" cy="11" r="7" />
             <path d="m20 20-3.5-3.5" />
           </svg>
-          <span className="truncate font-mono text-sm text-foreground sm:text-base">
+          <span className="truncate font-mono text-base text-foreground">
             {text}
             <span className="search-caret ml-0.5 inline-block h-[1.1em] w-[2px] translate-y-[3px] bg-foreground" />
           </span>
@@ -110,7 +110,7 @@ export default function SearchDemo() {
           <span className="rounded bg-primary px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-primary-foreground">
             Top result
           </span>
-          <span className="truncate text-sm font-medium sm:text-base">
+          <span className="truncate text-base font-medium">
             {active.result}
           </span>
         </div>

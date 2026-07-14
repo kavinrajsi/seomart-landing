@@ -8,13 +8,13 @@ export function PolicyHeading({ children }) {
 
 export function PolicyText({ children }) {
   return (
-    <p className="mb-4 leading-relaxed text-muted-foreground">{children}</p>
+    <p className="mb-4 leading-normal text-muted-foreground">{children}</p>
   );
 }
 
 export function PolicyList({ items }) {
   return (
-    <ul className="mb-4 list-disc pl-6 leading-relaxed text-muted-foreground">
+    <ul className="mb-4 list-disc pl-6 leading-normal text-muted-foreground">
       {items.map((item, i) => (
         <li key={i} className="mb-1">
           {item}

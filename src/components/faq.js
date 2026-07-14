@@ -59,7 +59,7 @@ export default function Faq() {
                   <path d="M12 5v14M5 12h14" />
                 </svg>
               </summary>
-              <p className="max-w-3xl pb-6 text-base leading-relaxed text-muted-foreground">
+              <p className="max-w-3xl pb-6 text-base leading-normal text-muted-foreground">
                 {f.a}
               </p>
             </details>

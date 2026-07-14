@@ -6,7 +6,7 @@ import { PortableText } from "@portabletext/react";
 const components = {
   block: {
     normal: ({ children }) => (
-      <p className="mb-4 text-base leading-relaxed text-muted-foreground">
+      <p className="mb-4 text-base leading-normal text-muted-foreground">
         {children}
       </p>
     ),
@@ -22,19 +22,19 @@ const components = {
       <h5 className="mb-2 mt-6 text-lg font-semibold">{children}</h5>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="mb-4 border-l-2 pl-4 text-lg font-light leading-relaxed">
+      <blockquote className="mb-4 border-l-2 pl-4 text-lg font-light leading-normal">
         {children}
       </blockquote>
     ),
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="mb-4 list-disc space-y-2 pl-6 text-base leading-relaxed text-muted-foreground">
+      <ul className="mb-4 list-disc space-y-2 pl-6 text-base leading-normal text-muted-foreground">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="mb-4 list-decimal space-y-2 pl-6 text-base leading-relaxed text-muted-foreground">
+      <ol className="mb-4 list-decimal space-y-2 pl-6 text-base leading-normal text-muted-foreground">
         {children}
       </ol>
     ),
@@ -128,7 +128,7 @@ export default function CaseStudyDrawer({ study, onClose }) {
             <img
               src={study.cover ?? study.image}
               alt={study.alt ?? study.client}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-center"
             />
           </div>
         )}
@@ -160,7 +160,7 @@ export default function CaseStudyDrawer({ study, onClose }) {
               </section>
             ))
           ) : (
-            <p className="text-base leading-relaxed text-muted-foreground">
+            <p className="text-base leading-normal text-muted-foreground">
               {study.summary}
             </p>
           )}

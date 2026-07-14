@@ -20,7 +20,7 @@ export default function Button({
   ...props
 }) {
   const sizes = {
-    default: "h-10 px-5 text-sm",
+    default: "h-10 px-5 text-base",
     lg: "h-12 px-7 text-base",
   };
   const sizeClass =

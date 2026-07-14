@@ -58,6 +58,12 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
+  a,
+  button,
+  [role="button"],
+  summary {
+    cursor: pointer;
+  }
 }
 
 /* unfold-style accent word inside display headlines — Anek Tamil light for

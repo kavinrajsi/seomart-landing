@@ -60,7 +60,7 @@ export default function Header() {
                   key={l.href}
                   href={l.href}
                   aria-current={active ? "true" : undefined}
-                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  className={`rounded-full px-4 py-2 text-base font-medium transition-colors ${
                     active
                       ? "bg-primary text-primary-foreground"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"

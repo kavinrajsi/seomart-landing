@@ -27,7 +27,7 @@ export default function CaseStudiesClient({ cases }) {
           ease: "none",
           scrollTrigger: {
             trigger: panelRef.current,
-            start: "top 72px",
+            start: "top 18%",
             end: () => "+=" + dist(),
             pin: true,
             scrub: 1,
@@ -74,12 +74,13 @@ export default function CaseStudiesClient({ cases }) {
               </p>
               <h3 className="mb-2 text-xl font-semibold">{c.client}</h3>
               {c.summary && (
-                <p className="line-clamp-3 text-base leading-relaxed text-muted-foreground">
+                <p className="line-clamp-3 text-base leading-normal text-muted-foreground">
                   {c.summary}
                 </p>
               )}
             </button>
           ))}
+          <div aria-hidden className="w-screen shrink-0 motion-reduce:hidden" />
         </div>
       </div>
       <CaseStudyDrawer study={active} onClose={() => setActive(null)} />

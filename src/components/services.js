@@ -245,7 +245,7 @@ function ClientChip({ client }) {
           className="max-h-8 w-auto object-contain opacity-70 grayscale"
         />
       ) : (
-        <span className="text-center text-sm font-semibold text-muted-foreground/70">
+        <span className="text-center text-base font-semibold text-muted-foreground/70">
           {client.name}
         </span>
       )}
@@ -320,7 +320,7 @@ function ServiceCard({ icon, title, body }) {
       </div>
       <div className="border-l pl-5">
         <h4 className="mb-1.5 font-semibold">{title}</h4>
-        <p className="text-sm leading-relaxed text-muted-foreground">{body}</p>
+        <p className="text-base leading-normal text-muted-foreground">{body}</p>
       </div>
     </div>
   );

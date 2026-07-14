@@ -63,11 +63,11 @@ export default function Testimonials() {
               <div>
                 <span
                   aria-hidden="true"
-                  className="serif-accent block select-none text-7xl leading-none text-foreground/15 transition-colors group-hover:text-foreground/30"
+                  className="serif-accent block select-none text-7xl leading-normal text-foreground/15 transition-colors group-hover:text-foreground/30"
                 >
                   “
                 </span>
-                <blockquote className="mb-10 mt-4 text-xl font-light leading-relaxed lg:text-2xl">
+                <blockquote className="mb-10 mt-4 text-xl font-light leading-normal lg:text-2xl">
                   {t.quote}
                 </blockquote>
               </div>
