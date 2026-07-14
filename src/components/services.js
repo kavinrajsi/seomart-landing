@@ -1,5 +1,4 @@
 import Button from "./button";
-import ServicesReveal from "./services-reveal";
 
 function Icon({ path, size = 24, className = "" }) {
   return (
@@ -222,16 +221,16 @@ function ServiceCard({ icon, title, body }) {
   );
 }
 
-// Sticky step for the stacking cards: each card's title bar (h-16 = 64px)
+// Sticky pin-stack for all breakpoints: each card's title bar (h-16 = 64px)
 // peeks above the next, so TOP_BASE clears the fixed header and every card
-// offsets by one bar-height.
+// offsets by one bar-height. Mobile uses 70vh, desktop uses 100svh.
 const HEADER_H = 64;
 const TOP_BASE = 24;
 
 function ServiceBand({ band, index }) {
   return (
     <article
-      className="stack-card mb-4 flex flex-col border bg-card lg:mb-0 lg:min-h-[100svh] motion-safe:lg:sticky"
+      className="stack-card mb-0 flex flex-col border bg-card min-h-[70vh] lg:min-h-[100svh] motion-safe:sticky"
       style={{ top: `${TOP_BASE + index * HEADER_H}px` }}
     >
       <header className="flex h-16 items-center justify-between gap-4 border-b bg-card px-6 lg:px-10">
@@ -285,11 +284,9 @@ export default function Services() {
           nothing you don&apos;t.
         </h2>
 
-        <ServicesReveal>
-          {bands.map((band, i) => (
-            <ServiceBand key={band.eyebrow} band={band} index={i} />
-          ))}
-        </ServicesReveal>
+        {bands.map((band, i) => (
+          <ServiceBand key={band.eyebrow} band={band} index={i} />
+        ))}
 
         <div
 
