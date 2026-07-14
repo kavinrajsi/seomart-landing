@@ -122,7 +122,7 @@ export default function Header() {
                   key={l.href}
                   href={l.href}
                   aria-current={active ? "true" : undefined}
-                  className={`rounded-full px-4 py-2 text-base font-medium transition-colors ${
+                  className={`rounded-lg px-4 py-2 text-base font-medium transition-colors ${
                     active
                       ? dark
                         ? "bg-primary-foreground text-primary"
@@ -150,7 +150,7 @@ export default function Header() {
           </div>
 
           <button
-            className={`rounded-md p-2 lg:hidden ${
+            className={`rounded-lg p-2 lg:hidden ${
               dark ? "hover:bg-white/10" : "hover:bg-muted"
             }`}
             aria-expanded={open}
