@@ -20,6 +20,7 @@ const anchorId = (href) => href.split("#")[1];
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState("");
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     const sections = links
@@ -40,8 +41,29 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
+  // Hide the nav while the Services section fills the viewport.
+  useEffect(() => {
+    const services = document.getElementById("services");
+    if (!services) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setHidden(entry.isIntersecting);
+        if (entry.isIntersecting) setOpen(false);
+      },
+      { rootMargin: "-15% 0px -15% 0px" }
+    );
+    observer.observe(services);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <header className="fixed top-[18px] left-0 right-0 z-50">
+    <header
+      className={`fixed top-[18px] left-0 right-0 z-50 transition-all duration-300 ${
+        hidden
+          ? "pointer-events-none -translate-y-[200%] opacity-0"
+          : "translate-y-0 opacity-100"
+      }`}
+    >
       <div className="mx-4">
         <div className="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-white/40 bg-background/60 px-5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_2px_20px_0_rgba(37,37,33,0.08)] backdrop-blur-xl backdrop-saturate-150">
           <Link

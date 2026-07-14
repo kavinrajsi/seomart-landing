@@ -210,7 +210,7 @@ const bands = [
 function ServiceCard({ icon, title, body }) {
   return (
     <div className="border bg-card p-4 sm:p-5">
-      <div className="mb-3 flex items-center gap-3">
+      <div className="mb-2 flex items-center gap-3">
         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
           <Icon path={glyphs[icon]} size={20} />
         </div>
@@ -225,7 +225,7 @@ function ServiceCard({ icon, title, body }) {
 // peeks above the next, so TOP_BASE clears the fixed header and every card
 // offsets by one bar-height.
 const HEADER_H = 64;
-const TOP_BASE = 88;
+const TOP_BASE = 24;
 
 function ServiceBand({ band, index }) {
   return (
@@ -247,10 +247,9 @@ function ServiceBand({ band, index }) {
         </span>
       </header>
 
-      <div className="flex flex-1 items-center px-6 py-10 sm:px-10 lg:px-14">
+      <div className="flex flex-1 items-start px-6 py-10 sm:px-10 lg:px-14">
         <div className="grid w-full grid-cols-1 gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>
-            <div className="mb-6 h-px w-10 bg-foreground" aria-hidden="true" />
             <h3 className="mb-5 max-w-md text-3xl font-semibold sm:text-4xl lg:text-5xl">
               {band.heading}
             </h3>

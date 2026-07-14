@@ -57,17 +57,11 @@ export default function Industries() {
         <ul>
           {industries.map((ind) => (
             <li key={ind.name} className="group border-t last:border-b">
-              <div className="grid grid-cols-1 items-baseline gap-1 py-5 sm:grid-cols-[1.2fr_1fr_auto] sm:gap-6 lg:py-6">
+              <div className="grid grid-cols-1 items-baseline gap-1 py-5 sm:grid-cols-[1.2fr_1fr] sm:gap-6 lg:py-6">
                 <h3 className="text-2xl font-light transition-transform duration-300 group-hover:translate-x-2 sm:text-3xl lg:text-4xl">
                   {ind.name}
                 </h3>
                 <p className="text-base text-muted-foreground">{ind.line}</p>
-                <span
-                  aria-hidden="true"
-                  className="hidden text-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:block"
-                >
-                  →
-                </span>
               </div>
             </li>
           ))}
