@@ -1,5 +1,6 @@
 import Button from "./button";
 import CalButton from "./cal-button";
+import { AUDIT_URL } from "@/lib/constants";
 
 export default function FinalCta() {
   return (
@@ -20,7 +21,7 @@ export default function FinalCta() {
           <CalButton variant="inverted" size="lg">
             Book a Free Consultation
           </CalButton>
-          <Button href="https://superengine.vercel.app/?utm_source=searchmadarth&utm_medium=website&utm_campaign=free_audit" target="_blank" rel="noopener noreferrer" variant="ghost-light" size="lg">
+          <Button href={AUDIT_URL} target="_blank" rel="noopener noreferrer" variant="ghost-light" size="lg">
             Get a Free Audit →
           </Button>
         </div>

@@ -29,7 +29,14 @@ const FALLBACK_CASES = [
 ];
 
 export default async function CaseStudies() {
-  const cases = (await getCaseStudies()) ?? FALLBACK_CASES;
+  let cases;
+  try {
+    cases = await getCaseStudies();
+  } catch (error) {
+    console.error("Failed to fetch case studies:", error);
+    cases = null;
+  }
+  cases = cases ?? FALLBACK_CASES;
   return (
     <section id="work" className="scroll-mt-24 pb-10 lg:pb-30">
       <div className="mx-4">

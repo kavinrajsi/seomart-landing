@@ -1,8 +1,10 @@
+import { PHONE } from "@/lib/constants";
+
 export default function MobileBar() {
   return (
     <div className="fixed bottom-0 left-0 z-50 w-full rounded-t-lg bg-primary text-primary-foreground shadow-lg sm:hidden">
       <a
-        href="tel:+918667767447"
+        href={`tel:${PHONE}`}
         className="block w-full px-8 py-4 text-center text-base font-semibold"
       >
         Call Us

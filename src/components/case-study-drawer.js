@@ -49,7 +49,7 @@ const components = {
         href={value?.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="underline underline-offset-2 hover:text-foreground"
+        className="underline underline-offset-2 hover:text-foreground cursor-pointer"
       >
         {children}
       </a>

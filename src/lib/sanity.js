@@ -1,6 +1,10 @@
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 
+if (!projectId || !dataset) {
+  throw new Error("Missing Sanity environment variables: NEXT_PUBLIC_SANITY_PROJECT_ID and/or NEXT_PUBLIC_SANITY_DATASET");
+}
+
 export async function sanityFetch(query) {
   const url = `https://${projectId}.api.sanity.io/v2024-01-01/data/query/${dataset}?query=${encodeURIComponent(query)}`;
   const res = await fetch(url, { next: { revalidate: 3600 } });

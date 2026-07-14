@@ -1,6 +1,5 @@
 import Button from "./button";
-
-const AUDIT_URL = "https://superengine.vercel.app/?utm_source=searchmadarth&utm_medium=website&utm_campaign=free_audit";
+import { AUDIT_URL } from "@/lib/constants";
 
 const offers = [
   {
@@ -87,15 +86,19 @@ export default function Offer() {
                 ))}
               </ul>
               <div className="mt-auto">
-                <Button
+                <a
                   href={offer.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  variant={offer.featured ? "ghost-light" : "ghost"}
-                  size="lg"
+                  className="inline-block"
                 >
-                  {offer.cta} →
-                </Button>
+                  <Button
+                    variant={offer.featured ? "ghost-light" : "ghost"}
+                    size="lg"
+                  >
+                    {offer.cta} →
+                  </Button>
+                </a>
               </div>
             </div>
           ))}

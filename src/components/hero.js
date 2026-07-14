@@ -1,5 +1,6 @@
 import Button from "./button";
 import SearchDemo from "./search-demo";
+import { AUDIT_URL } from "@/lib/constants";
 
 export default function Hero() {
   return (
@@ -23,7 +24,7 @@ export default function Hero() {
           <Button href="#services" size="lg">
             Explore Our Services
           </Button>
-          <Button href="https://superengine.vercel.app/?utm_source=searchmadarth&utm_medium=website&utm_campaign=free_audit" target="_blank" rel="noopener noreferrer" variant="outline" size="lg">
+          <Button href={AUDIT_URL} target="_blank" rel="noopener noreferrer" variant="outline" size="lg">
             Book a Free Audit
           </Button>
         </div>

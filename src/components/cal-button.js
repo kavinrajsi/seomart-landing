@@ -3,9 +3,7 @@
 import { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
 import Button from "./button";
-
-const CAL_NAMESPACE = "15min";
-const CAL_LINK = "madformangoes-1ansq1/15min";
+import { CAL_NAMESPACE, CAL_LINK } from "@/lib/constants";
 
 export default function CalButton({ children, ...props }) {
   useEffect(() => {

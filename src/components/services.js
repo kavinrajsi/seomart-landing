@@ -1,4 +1,5 @@
 import Button from "./button";
+import { AUDIT_URL, PHONE } from "@/lib/constants";
 
 function Icon({ path, size = 24, className = "" }) {
   return (
@@ -302,8 +303,8 @@ export default function Services() {
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button href="https://superengine.vercel.app/?utm_source=searchmadarth&utm_medium=website&utm_campaign=free_audit" target="_blank" rel="noopener noreferrer">Get Free Growth Audit →</Button>
-            <Button href="tel:+918667767447" variant="outline">
+            <Button href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Get Free Growth Audit →</Button>
+            <Button href={`tel:${PHONE}`} variant="outline">
               Book a Consultation →
             </Button>
           </div>

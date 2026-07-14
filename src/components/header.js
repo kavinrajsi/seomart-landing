@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Button from "./button";
 import Logo from "./logo";
+import { AUDIT_URL } from "@/lib/constants";
 
 // Anchor links carry a "/" prefix so navigation works from subpages
 // (e.g. policy pages) as well as the home page.
@@ -139,7 +140,7 @@ export default function Header() {
 
           <div className="hidden lg:block">
             <Button
-              href="https://superengine.vercel.app/?utm_source=searchmadarth&utm_medium=website&utm_campaign=free_audit"
+              href={AUDIT_URL}
               target="_blank"
               rel="noopener noreferrer"
               variant={dark ? "inverted" : "primary"}
@@ -210,7 +211,7 @@ export default function Header() {
               })}
             </nav>
             <Button
-              href="https://superengine.vercel.app/?utm_source=searchmadarth&utm_medium=website&utm_campaign=free_audit"
+              href={AUDIT_URL}
               target="_blank"
               rel="noopener noreferrer"
               variant={dark ? "inverted" : "primary"}
