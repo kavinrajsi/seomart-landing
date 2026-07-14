@@ -12,6 +12,12 @@ const TITLE =
   "SearchMadarth® — SEO, AEO & GEO Agency | We Search. We Build. We Grow Your Business.";
 const DESCRIPTION =
   "SearchMadarth® is a digital growth agency for Indian SMEs offering SEO, Answer Engine Optimisation (AEO), Generative Engine Optimisation (GEO), Google Ads, Meta advertising and performance-first web development — 1000+ brands served, results measured in revenue.";
+const OG_IMAGE = {
+  url: "/meta-og-image.png",
+  width: 1200,
+  height: 628,
+  alt: "SearchMadarth® — We Search. We Build. We Grow Your Business.",
+};
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -42,13 +48,13 @@ export const metadata = {
     locale: "en_IN",
     title: TITLE,
     description: DESCRIPTION,
-    // TODO: add images: [{ url: "/og.png", width: 1200, height: 630 }]
-    // once a 1200×630 OG asset exists in /public
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
+    images: [OG_IMAGE.url],
   },
   robots: {
     index: true,
