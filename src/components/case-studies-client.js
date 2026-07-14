@@ -80,7 +80,7 @@ export default function CaseStudiesClient({ cases }) {
               )}
             </button>
           ))}
-          <div aria-hidden className="w-screen shrink-0 motion-reduce:hidden" />
+          <div aria-hidden className="w-[40px] shrink-0 motion-reduce:hidden md:w-[200px]" />
         </div>
       </div>
       <CaseStudyDrawer study={active} onClose={() => setActive(null)} />
