@@ -34,7 +34,7 @@ export default function FaqList({ faqs }) {
           key={faq.q}
           name="faq"
           data-faq-item
-          className="group border-t last:border-b"
+          className="group border-t-[4px] last:border-b-[4px]"
         >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-base font-medium sm:text-lg [&::-webkit-details-marker]:hidden">
             {faq.q}

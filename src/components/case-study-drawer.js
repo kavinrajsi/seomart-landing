@@ -22,7 +22,7 @@ const components = {
       <h5 className="mb-2 mt-6 text-lg font-semibold">{children}</h5>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="mb-4 border-l-2 pl-4 text-lg font-light leading-normal">
+      <blockquote className="mb-4 border-l-[4px] pl-4 text-lg font-light leading-normal">
         {children}
       </blockquote>
     ),
@@ -130,7 +130,7 @@ export default function CaseStudyDrawer({ study, onClose }) {
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className="fixed right-6 top-6 z-10 flex size-10 items-center justify-center border bg-background transition-colors hover:bg-secondary"
+          className="fixed right-6 top-6 z-10 flex size-10 items-center justify-center border-[4px] bg-background transition-colors hover:bg-secondary"
         >
           <svg
             width="18"

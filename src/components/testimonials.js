@@ -38,7 +38,7 @@ function Stars() {
 export default function Testimonials() {
   return (
     <section className="mx-4 pb-10 lg:pb-30">
-      <div className="mx-auto max-w-6xl border-t pt-10 lg:pt-16">
+      <div className="mx-auto max-w-6xl border-t-[4px] pt-10 lg:pt-16">
         <p
 
           className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground"
@@ -74,7 +74,7 @@ export default function Testimonials() {
               <figcaption className="flex items-center gap-4">
                 <span
                   aria-hidden="true"
-                  className="flex size-10 shrink-0 items-center justify-center border bg-secondary font-mono text-xs font-medium tracking-[0.1em]"
+                  className="flex size-10 shrink-0 items-center justify-center border-[4px] bg-secondary font-mono text-xs font-medium tracking-[0.1em]"
                 >
                   {testimonial.initials}
                 </span>

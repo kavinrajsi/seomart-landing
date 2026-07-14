@@ -100,7 +100,7 @@ export default function Header() {
     >
       <div className="mx-4">
         <div
-          className={`mx-auto flex max-w-6xl items-center justify-between rounded-lg border px-5 py-3 backdrop-blur-xl backdrop-saturate-150 transition-colors duration-300 ${
+          className={`mx-auto flex max-w-6xl items-center justify-between rounded-lg border-[4px] px-5 py-3 backdrop-blur-xl backdrop-saturate-150 transition-colors duration-300 ${
             dark
               ? "border-white/15 bg-primary/60 text-primary-foreground shadow-[0_2px_24px_0_rgba(0,0,0,0.35)]"
               : "border-white/40 bg-background/60 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_2px_20px_0_rgba(37,37,33,0.08)]"
@@ -177,7 +177,7 @@ export default function Header() {
 
         {open && (
           <div
-            className={`fixed inset-x-4 top-[84px] bottom-0 z-[60] flex flex-col rounded-lg border p-4 shadow-2xl transition-colors duration-300 lg:hidden ${
+            className={`fixed inset-x-4 top-[84px] bottom-0 z-[60] flex flex-col rounded-lg border-[4px] p-4 shadow-2xl transition-colors duration-300 lg:hidden ${
               dark
                 ? "border-white/15 bg-primary text-primary-foreground"
                 : "border-black/10 bg-background text-foreground"
