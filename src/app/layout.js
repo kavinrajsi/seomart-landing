@@ -26,6 +26,10 @@ export const metadata = {
     template: "%s | SearchMadarth®",
   },
   description: DESCRIPTION,
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
   keywords: [
     "SEO agency India",
     "Answer Engine Optimisation",
