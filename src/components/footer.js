@@ -26,13 +26,13 @@ export default function Footer() {
             className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
             aria-label="Footer"
           >
-            {links.map((l) => (
+            {links.map((link) => (
               <Link
-                key={l.href}
-                href={l.href}
+                key={link.href}
+                href={link.href}
                 className="font-mono text-xs uppercase tracking-[0.1em] text-primary-foreground/60 hover:text-primary-foreground"
               >
-                {l.label}
+                {link.label}
               </Link>
             ))}
           </nav>
@@ -42,13 +42,13 @@ export default function Footer() {
             className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
             aria-label="Legal"
           >
-            {legalLinks.map((l) => (
+            {legalLinks.map((link) => (
               <Link
-                key={l.href}
-                href={l.href}
+                key={link.href}
+                href={link.href}
                 className="font-mono text-[11px] uppercase tracking-[0.1em] text-primary-foreground/50 hover:text-primary-foreground"
               >
-                {l.label}
+                {link.label}
               </Link>
             ))}
           </nav>

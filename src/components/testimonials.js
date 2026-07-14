@@ -55,9 +55,9 @@ export default function Testimonials() {
           Real owners. Real results. Measured in revenue, not vanity metrics.
         </p>
         <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-2">
-          {testimonials.map((t) => (
+          {testimonials.map((testimonial) => (
             <figure
-              key={t.name}
+              key={testimonial.name}
               className="group flex flex-col justify-between bg-background p-8 transition-colors hover:bg-card lg:p-10"
             >
               <div>
@@ -68,7 +68,7 @@ export default function Testimonials() {
                   “
                 </span>
                 <blockquote className="mb-10 mt-4 text-xl font-light leading-normal lg:text-2xl">
-                  {t.quote}
+                  {testimonial.quote}
                 </blockquote>
               </div>
               <figcaption className="flex items-center gap-4">
@@ -76,13 +76,13 @@ export default function Testimonials() {
                   aria-hidden="true"
                   className="flex size-10 shrink-0 items-center justify-center border bg-secondary font-mono text-xs font-medium tracking-[0.1em]"
                 >
-                  {t.initials}
+                  {testimonial.initials}
                 </span>
                 <span className="flex flex-col gap-0.5">
                   <span className="font-mono text-xs uppercase tracking-[0.15em]">
-                    {t.name}
+                    {testimonial.name}
                   </span>
-                  <span className="text-xs text-muted-foreground">{t.role}</span>
+                  <span className="text-xs text-muted-foreground">{testimonial.role}</span>
                 </span>
                 <span className="ml-auto">
                   <Stars />

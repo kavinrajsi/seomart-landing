@@ -26,7 +26,7 @@ export default function Header() {
 
   useEffect(() => {
     const sections = links
-      .map((l) => document.getElementById(anchorId(l.href)))
+      .map((link) => document.getElementById(anchorId(link.href)))
       .filter(Boolean);
 
     // Middle-of-viewport band decides which section is "current".

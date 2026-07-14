@@ -165,15 +165,15 @@ export default function CaseStudyDrawer({ study, onClose }) {
           </h2>
 
           {cached.sections?.length ? (
-            cached.sections.map((s) => (
-              <section key={s._key}>
-                {s.content && (
-                  <PortableText value={s.content} components={components} />
+            cached.sections.map((section) => (
+              <section key={section._key}>
+                {section.content && (
+                  <PortableText value={section.content} components={components} />
                 )}
-                {s.media && (
+                {section.media && (
                   <figure className="my-8">
                     <img
-                      src={s.media}
+                      src={section.media}
                       alt=""
                       loading="lazy"
                       className="w-full bg-muted"

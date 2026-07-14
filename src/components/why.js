@@ -35,10 +35,10 @@ export default function Why() {
           Built for <span className="serif-accent">real</span> results.
         </h2>
         <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-2 lg:grid-cols-4">
-          {points.map((p) => (
-            <div key={p.title} className="bg-background p-6 lg:p-8">
-              <h3 className="mb-2 text-lg font-semibold">{p.title}</h3>
-              <p className="text-base text-muted-foreground">{p.body}</p>
+          {points.map((point) => (
+            <div key={point.title} className="bg-background p-6 lg:p-8">
+              <h3 className="mb-2 text-lg font-semibold">{point.title}</h3>
+              <p className="text-base text-muted-foreground">{point.body}</p>
             </div>
           ))}
         </div>

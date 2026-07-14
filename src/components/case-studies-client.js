@@ -44,28 +44,28 @@ export default function CaseStudiesClient({ cases }) {
           ref={trackRef}
           className="flex flex-row gap-6 px-4 lg:px-[max(1rem,calc((100vw-72rem)/2))]"
         >
-          {cases.map((c) => (
+          {cases.map((caseStudy) => (
             <button
-              key={c.slug ?? c.client}
+              key={caseStudy.slug ?? caseStudy.client}
               type="button"
-              onClick={() => setActive(c)}
+              onClick={() => setActive(caseStudy)}
               className="group w-[80vw] shrink-0 text-left sm:w-[24rem] lg:w-[28rem]"
             >
               <div className="mb-5 aspect-video overflow-hidden bg-muted">
                 <img
-                  src={c.image}
-                  alt={c.alt ?? c.client}
+                  src={caseStudy.image}
+                  alt={caseStudy.alt ?? caseStudy.client}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
               <p className="mb-2 font-mono text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
-                {c.tag}
+                {caseStudy.tag}
               </p>
-              <h3 className="mb-2 text-xl font-semibold">{c.client}</h3>
-              {c.summary && (
+              <h3 className="mb-2 text-xl font-semibold">{caseStudy.client}</h3>
+              {caseStudy.summary && (
                 <p className="line-clamp-3 text-base leading-normal text-muted-foreground">
-                  {c.summary}
+                  {caseStudy.summary}
                 </p>
               )}
             </button>

@@ -258,8 +258,8 @@ function ServiceBand({ band, index }) {
             <p className="max-w-md text-lg text-muted-foreground">{band.body}</p>
           </div>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            {band.cards.map((c) => (
-              <ServiceCard key={c.title} {...c} />
+            {band.cards.map((card) => (
+              <ServiceCard key={card.title} {...card} />
             ))}
           </div>
         </div>

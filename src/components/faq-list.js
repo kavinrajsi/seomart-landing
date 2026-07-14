@@ -29,15 +29,15 @@ export default function FaqList({ faqs }) {
 
   return (
     <div ref={scope} className="flex flex-col">
-      {faqs.map((f) => (
+      {faqs.map((faq) => (
         <details
-          key={f.q}
+          key={faq.q}
           name="faq"
           data-faq-item
           className="group border-t last:border-b"
         >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-base font-medium sm:text-lg [&::-webkit-details-marker]:hidden">
-            {f.q}
+            {faq.q}
             <svg
               width="18"
               height="18"
@@ -53,7 +53,7 @@ export default function FaqList({ faqs }) {
             </svg>
           </summary>
           <p className="max-w-3xl pb-6 text-base leading-normal text-muted-foreground">
-            {f.a}
+            {faq.a}
           </p>
         </details>
       ))}

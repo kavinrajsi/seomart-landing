@@ -47,15 +47,15 @@ export default function Stats() {
 
           className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {stats.map((s) => (
-            <div key={s.label}>
+          {stats.map((stat) => (
+            <div key={stat.label}>
               <p className="mb-3 text-6xl font-semibold tracking-tight lg:text-7xl">
-                {s.prefix}
-                <CountUp value={s.value} decimals={s.decimals} />
-                {s.suffix}
+                {stat.prefix}
+                <CountUp value={stat.value} decimals={stat.decimals} />
+                {stat.suffix}
               </p>
               <p className="font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                {s.label}
+                {stat.label}
               </p>
             </div>
           ))}
