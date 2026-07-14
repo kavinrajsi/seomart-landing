@@ -1,5 +1,7 @@
 import Button from "./button";
 
+const AUDIT_URL = "https://superengine.vercel.app/?utm_source=searchmadarth&utm_medium=website&utm_campaign=free_audit";
+
 const offers = [
   {
     title: "Get a Free Digital Growth Audit",
@@ -11,6 +13,7 @@ const offers = [
       "Personalised 90-Day Growth Roadmap",
     ],
     cta: "Claim Your Free Audit",
+    href: AUDIT_URL,
     featured: true,
   },
   {
@@ -22,6 +25,7 @@ const offers = [
       "90-Day Growth Roadmap",
     ],
     cta: "Run My SEO Audit",
+    href: AUDIT_URL,
     featured: false,
   },
 ];
@@ -84,7 +88,9 @@ export default function Offer() {
               </ul>
               <div className="mt-auto">
                 <Button
-                  href="#contact"
+                  href={offer.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   variant={offer.featured ? "ghost-light" : "ghost"}
                   size="lg"
                 >

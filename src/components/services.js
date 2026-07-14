@@ -1,7 +1,5 @@
 import Button from "./button";
 
-const LOGO_DIR = "/logo";
-
 function Icon({ path, size = 24, className = "" }) {
   return (
     <svg
@@ -106,15 +104,6 @@ const glyphs = {
   ),
 };
 
-const clients = [
-  { name: "Indicus Paints", logo: `${LOGO_DIR}/indicus.png` },
-  { name: "NAC Jewellers", logo: `${LOGO_DIR}/nac-jewellers.png` },
-  { name: "KVB", logo: `${LOGO_DIR}/karur-vysya-bank.png` },
-  { name: "TAFE Tribe", logo: `${LOGO_DIR}/tafe-tribe.png` },
-  { name: "Dahnay", logo: `${LOGO_DIR}/dahnay.png` },
-  { name: "Inspace India", logo: `${LOGO_DIR}/inspace.png` },
-];
-
 const bands = [
   {
     eyebrow: "Search Optimisation Services",
@@ -125,7 +114,6 @@ const bands = [
       </>
     ),
     body: "Traditional SEO alone is no longer enough. We help businesses get discovered across search engines, AI assistants, and generative search experiences.",
-    footer: "clients",
     cards: [
       {
         icon: "search",
@@ -158,7 +146,6 @@ const bands = [
       </>
     ),
     body: "Most agencies focus on clicks and impressions. We focus on leads, conversions, and business outcomes through continuous optimisation.",
-    footer: "stats",
     cards: [
       {
         icon: "megaphone",
@@ -190,7 +177,6 @@ const bands = [
       </>
     ),
     body: "Build fast, scalable, and SEO-ready websites designed to convert visitors into customers and grow your business.",
-    footer: "features",
     cards: [
       {
         icon: "globe",
@@ -221,136 +207,63 @@ const bands = [
   },
 ];
 
-const adStats = [
-  { value: 8, suffix: "M+", label: "Campaign Impressions" },
-  { value: 58, suffix: "%", label: "Sales Qualified Leads" },
-  { prefix: "₹", value: 10, suffix: "Cr+", label: "Managed in Ad Spend" },
-  { text: "Lower CPL", label: "Better ROI · Max Results" },
-];
-
-const webFeatures = [
-  { icon: "bolt", label: "Fast & Performance Optimised" },
-  { icon: "shield", label: "Secure & Scalable Architecture" },
-  { icon: "search", label: "SEO Ready from the Ground Up" },
-  { icon: "mobile", label: "Mobile First & User Focused" },
-];
-
-function ClientChip({ client }) {
-  return (
-    <div className="flex h-16 items-center justify-center border px-4">
-      {client.logo ? (
-        <img
-          src={client.logo}
-          alt={client.name}
-          className="max-h-8 w-auto object-contain opacity-70 grayscale"
-        />
-      ) : (
-        <span className="text-center text-base font-semibold text-muted-foreground/70">
-          {client.name}
-        </span>
-      )}
-    </div>
-  );
-}
-
-function BandFooter({ footer }) {
-  if (footer === "clients") {
-    return (
-      <div>
-        <p className="mb-4 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
-          Clients We Work With
-        </p>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {clients.map((c) => (
-            <ClientChip key={c.name} client={c} />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (footer === "stats") {
-    return (
-      <div
-
-        className="grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4"
-      >
-        {adStats.map((s) => (
-          <div key={s.label}>
-            <p className="mb-2 text-3xl font-semibold tracking-tight">
-              {s.text || (
-                <>
-                  {s.prefix}
-                  {s.value}
-                  {s.suffix}
-                </>
-              )}
-            </p>
-            <p className="font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground">
-              {s.label}
-            </p>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  return (
-    <div
-
-      className="grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4"
-    >
-      {webFeatures.map((f) => (
-        <div key={f.label}>
-          <Icon path={glyphs[f.icon]} size={22} className="mb-3" />
-          <p className="font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground">
-            {f.label}
-          </p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function ServiceCard({ icon, title, body }) {
   return (
-    <div className="flex items-start gap-5 border bg-card p-5 sm:p-6">
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-        <Icon path={glyphs[icon]} size={22} />
+    <div className="border bg-card p-4 sm:p-5">
+      <div className="mb-3 flex items-center gap-3">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+          <Icon path={glyphs[icon]} size={20} />
+        </div>
+        <h4 className="font-semibold">{title}</h4>
       </div>
-      <div className="border-l pl-5">
-        <h4 className="mb-1.5 font-semibold">{title}</h4>
-        <p className="text-base leading-normal text-muted-foreground">{body}</p>
-      </div>
+      <p className="text-sm leading-normal text-muted-foreground">{body}</p>
     </div>
   );
 }
 
-function ServiceBand({ band }) {
+// Sticky step for the stacking cards: each card's title bar (h-16 = 64px)
+// peeks above the next, so TOP_BASE clears the fixed header and every card
+// offsets by one bar-height.
+const HEADER_H = 64;
+const TOP_BASE = 88;
+
+function ServiceBand({ band, index }) {
   return (
-    <div className="border-t py-12 lg:py-16">
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-        <div className="flex flex-col">
+    <article
+      className="stack-card mb-4 flex flex-col border bg-card lg:mb-0 lg:min-h-[100svh] motion-safe:lg:sticky"
+      style={{ top: `${TOP_BASE + index * HEADER_H}px` }}
+    >
+      <header className="flex h-16 items-center justify-between gap-4 border-b bg-card px-6 lg:px-10">
+        <div className="flex items-baseline gap-3">
+          <span className="font-mono text-xs text-muted-foreground">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span className="text-xl font-semibold sm:text-2xl">
+            {band.eyebrow.replace(" Services", "")}
+          </span>
+        </div>
+        <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
+          {band.cards.length} services
+        </span>
+      </header>
+
+      <div className="flex flex-1 items-center px-6 py-10 sm:px-10 lg:px-14">
+        <div className="grid w-full grid-cols-1 gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>
-            <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.02em] text-muted-foreground">
-              {band.eyebrow}
-            </p>
             <div className="mb-6 h-px w-10 bg-foreground" aria-hidden="true" />
             <h3 className="mb-5 max-w-md text-3xl font-semibold sm:text-4xl lg:text-5xl">
               {band.heading}
             </h3>
             <p className="max-w-md text-lg text-muted-foreground">{band.body}</p>
-            <div className="my-8 h-px w-10 bg-foreground" aria-hidden="true" />
           </div>
-          <BandFooter footer={band.footer} />
-        </div>
-        <div className="flex flex-col gap-4">
-          {band.cards.map((c) => (
-            <ServiceCard key={c.title} {...c} />
-          ))}
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            {band.cards.map((c) => (
+              <ServiceCard key={c.title} {...c} />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -372,8 +285,8 @@ export default function Services() {
           nothing you don&apos;t.
         </h2>
 
-        {bands.map((band) => (
-          <ServiceBand key={band.eyebrow} band={band} />
+        {bands.map((band, i) => (
+          <ServiceBand key={band.eyebrow} band={band} index={i} />
         ))}
 
         <div
