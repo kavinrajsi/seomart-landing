@@ -82,7 +82,7 @@ export default function SearchDemo() {
 
   return (
     <div className="mx-auto w-full max-w-2xl" aria-hidden="true">
-      <div className="rounded-xl border bg-background p-2 shadow-[0_2px_20px_0_rgba(37,37,33,0.05)]">
+      <div className="rounded-lg border bg-background p-2 shadow-[0_2px_20px_0_rgba(37,37,33,0.05)]">
         <div className="flex items-center gap-3 rounded-lg bg-muted/60 px-4 py-3.5">
           <svg
             width="18"
