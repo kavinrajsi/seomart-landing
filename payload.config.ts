@@ -43,11 +43,19 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-    vercelBlobStorage({
-      collections: {
-        media: true,
-      },
-      token: process.env.BLOB_READ_WRITE_TOKEN || '',
-    }),
+    // Only route uploads to Vercel Blob when a token is present. Locally,
+    // without the token, Payload falls back to its default on-disk storage so
+    // dev works with no cloud dependency. Production must set the token, since
+    // serverless has no persistent filesystem.
+    ...(process.env.BLOB_READ_WRITE_TOKEN
+      ? [
+          vercelBlobStorage({
+            collections: {
+              media: true,
+            },
+            token: process.env.BLOB_READ_WRITE_TOKEN,
+          }),
+        ]
+      : []),
   ],
 })

@@ -80,7 +80,7 @@ export const getClients = unstable_cache(
         limit: 200,
         depth: 1,
       })
-      return docs.map((client: Record<string, unknown>) => ({
+      return docs.map((client: any) => ({
         name: client.name as string,
         logo:
           client.logo && typeof client.logo === 'object'
