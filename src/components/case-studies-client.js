@@ -15,33 +15,23 @@ export default function CaseStudiesClient({ cases }) {
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
-
-      // Pinned horizontal scroll: the card track translates left as the
-      // page scrolls down, so the viewer traverses the cases left → right.
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const track = trackRef.current;
-        const dist = () => track.scrollWidth - panelRef.current.clientWidth;
-        gsap.to(track, {
-          x: () => -dist(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: panelRef.current,
-            start: "top 18%",
-            end: () => "+=" + dist(),
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-      });
-
-      // Reduced motion: no animation — keep the row reachable by manual scroll.
-      mm.add("(prefers-reduced-motion: reduce)", () => {
-        const panel = panelRef.current;
-        panel.classList.add("overflow-x-auto");
-        return () => panel.classList.remove("overflow-x-auto");
+      // Pinned horizontal scroll: the card track translates left as the page
+      // scrolls down, so the viewer traverses the cases left → right. Runs on
+      // every device regardless of the reduce-motion setting (by request).
+      const track = trackRef.current;
+      const dist = () => track.scrollWidth - panelRef.current.clientWidth;
+      gsap.to(track, {
+        x: () => -dist(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: panelRef.current,
+          start: "top 18%",
+          end: () => "+=" + dist(),
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
       });
     },
     { scope: panelRef }
@@ -80,7 +70,7 @@ export default function CaseStudiesClient({ cases }) {
               )}
             </button>
           ))}
-          <div aria-hidden className="w-[40px] shrink-0 motion-reduce:hidden md:w-[200px]" />
+          <div aria-hidden className="w-[40px] shrink-0 md:w-[200px]" />
         </div>
       </div>
       <CaseStudyDrawer study={active} onClose={() => setActive(null)} />

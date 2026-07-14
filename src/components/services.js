@@ -1,4 +1,5 @@
 import Button from "./button";
+import ServicesReveal from "./services-reveal";
 
 function Icon({ path, size = 24, className = "" }) {
   return (
@@ -284,9 +285,11 @@ export default function Services() {
           nothing you don&apos;t.
         </h2>
 
-        {bands.map((band, i) => (
-          <ServiceBand key={band.eyebrow} band={band} index={i} />
-        ))}
+        <ServicesReveal>
+          {bands.map((band, i) => (
+            <ServiceBand key={band.eyebrow} band={band} index={i} />
+          ))}
+        </ServicesReveal>
 
         <div
 

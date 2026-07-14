@@ -21,18 +21,27 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState("");
   const [hidden, setHidden] = useState(false);
+  const [dark, setDark] = useState(false);
 
   useEffect(() => {
     const sections = links
       .map((l) => document.getElementById(anchorId(l.href)))
       .filter(Boolean);
 
-    // Middle-of-viewport band decides which section is "current"
+    // Middle-of-viewport band decides which section is "current".
+    // Track all intersecting sections so activeId clears to "" when none
+    // are in the band (e.g. over the CTA/footer past the FAQ).
+    const visible = new Set();
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) setActiveId(entry.target.id);
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
         }
+        const current =
+          links.map((l) => anchorId(l.href)).find((id) => visible.has(id)) ??
+          "";
+        setActiveId(current);
       },
       { rootMargin: "-35% 0px -60% 0px" }
     );
@@ -56,6 +65,30 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
+  // Switch to black-glass while the pill sits over the dark tail
+  // (FinalCta #contact + the footer, both bg-primary). A trip-line ~72px
+  // from the top marks where the pill overlaps a section.
+  useEffect(() => {
+    const darkEls = [
+      document.getElementById("contact"),
+      document.querySelector("footer"),
+    ].filter(Boolean);
+    if (!darkEls.length) return;
+    const over = new Set();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) over.add(entry.target);
+          else over.delete(entry.target);
+        }
+        setDark(over.size > 0);
+      },
+      { rootMargin: "-72px 0px -100% 0px" }
+    );
+    darkEls.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <header
       className={`fixed top-[18px] left-0 right-0 z-50 transition-all duration-300 ${
@@ -65,11 +98,17 @@ export default function Header() {
       }`}
     >
       <div className="mx-4">
-        <div className="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-white/40 bg-background/60 px-5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_2px_20px_0_rgba(37,37,33,0.08)] backdrop-blur-xl backdrop-saturate-150">
+        <div
+          className={`mx-auto flex max-w-6xl items-center justify-between rounded-full border px-5 py-3 backdrop-blur-xl backdrop-saturate-150 transition-colors duration-300 ${
+            dark
+              ? "border-white/15 bg-primary/60 text-primary-foreground shadow-[0_2px_24px_0_rgba(0,0,0,0.35)]"
+              : "border-white/40 bg-background/60 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_2px_20px_0_rgba(37,37,33,0.08)]"
+          }`}
+        >
           <Link
             href="/"
             aria-label="SearchMadarth home"
-            className="text-foreground"
+            className={dark ? "text-primary-foreground" : "text-foreground"}
           >
             <Logo className="h-5 w-auto lg:h-6" />
           </Link>
@@ -84,8 +123,12 @@ export default function Header() {
                   aria-current={active ? "true" : undefined}
                   className={`rounded-full px-4 py-2 text-base font-medium transition-colors ${
                     active
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                      ? dark
+                        ? "bg-primary-foreground text-primary"
+                        : "bg-primary text-primary-foreground"
+                      : dark
+                        ? "text-primary-foreground/70 hover:bg-white/10 hover:text-primary-foreground"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
                   {l.label}
@@ -95,11 +138,20 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:block">
-            <Button href="https://superengine.vercel.app/?utm_source=searchmadarth&utm_medium=website&utm_campaign=free_audit" target="_blank" rel="noopener noreferrer">Book a Free Audit</Button>
+            <Button
+              href="https://superengine.vercel.app/?utm_source=searchmadarth&utm_medium=website&utm_campaign=free_audit"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant={dark ? "inverted" : "primary"}
+            >
+              Book a Free Audit
+            </Button>
           </div>
 
           <button
-            className="rounded-md p-2 hover:bg-muted lg:hidden"
+            className={`rounded-md p-2 lg:hidden ${
+              dark ? "hover:bg-white/10" : "hover:bg-muted"
+            }`}
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
@@ -123,7 +175,13 @@ export default function Header() {
         </div>
 
         {open && (
-          <div className="mx-auto mt-2 max-w-6xl rounded-2xl border border-white/40 bg-background/70 p-4 shadow-lg backdrop-blur-xl backdrop-saturate-150 lg:hidden">
+          <div
+            className={`mx-auto mt-2 max-w-6xl rounded-2xl border p-4 shadow-lg backdrop-blur-xl backdrop-saturate-150 transition-colors duration-300 lg:hidden ${
+              dark
+                ? "border-white/15 bg-primary/70 text-primary-foreground"
+                : "border-white/40 bg-background/70 text-foreground"
+            }`}
+          >
             <nav className="flex flex-col" aria-label="Mobile">
               {links.map((l) => {
                 const active = activeId === anchorId(l.href);
@@ -133,7 +191,13 @@ export default function Header() {
                     href={l.href}
                     aria-current={active ? "true" : undefined}
                     className={`rounded-md px-3 py-3 text-base font-medium ${
-                      active ? "bg-primary text-primary-foreground" : "hover:bg-muted"
+                      active
+                        ? dark
+                          ? "bg-primary-foreground text-primary"
+                          : "bg-primary text-primary-foreground"
+                        : dark
+                          ? "hover:bg-white/10"
+                          : "hover:bg-muted"
                     }`}
                     onClick={() => setOpen(false)}
                   >
@@ -145,6 +209,7 @@ export default function Header() {
                 href="https://superengine.vercel.app/?utm_source=searchmadarth&utm_medium=website&utm_campaign=free_audit"
                 target="_blank"
                 rel="noopener noreferrer"
+                variant={dark ? "inverted" : "primary"}
                 className="mt-3"
                 onClick={() => setOpen(false)}
               >
