@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url'
 import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+import { s3Storage } from '@payloadcms/storage-s3'
 import sharp from 'sharp'
 
 import { Users } from './src/collections/Users'
@@ -43,17 +43,25 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-    // Only route uploads to Vercel Blob when a token is present. Locally,
-    // without the token, Payload falls back to its default on-disk storage so
-    // dev works with no cloud dependency. Production must set the token, since
-    // serverless has no persistent filesystem.
-    ...(process.env.BLOB_READ_WRITE_TOKEN
+    // Only route uploads to Cloudflare R2 (S3-compatible) when credentials are
+    // present. Locally, without them, Payload falls back to its default on-disk
+    // storage so dev works with no cloud dependency. Production must set them,
+    // since serverless has no persistent filesystem.
+    ...(process.env.R2_BUCKET && process.env.R2_ENDPOINT
       ? [
-          vercelBlobStorage({
+          s3Storage({
             collections: {
               media: true,
             },
-            token: process.env.BLOB_READ_WRITE_TOKEN,
+            bucket: process.env.R2_BUCKET,
+            config: {
+              endpoint: process.env.R2_ENDPOINT,
+              region: 'auto',
+              credentials: {
+                accessKeyId: process.env.R2_ACCESS_KEY_ID || '',
+                secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || '',
+              },
+            },
           }),
         ]
       : []),
