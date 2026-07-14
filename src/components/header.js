@@ -122,14 +122,14 @@ export default function Header() {
                   key={l.href}
                   href={l.href}
                   aria-current={active ? "true" : undefined}
-                  className={`rounded-lg px-4 py-2 text-base font-medium transition-colors ${
+                  className={`rounded-lg border-[4px] px-4 py-2 text-base font-medium transition-colors ${
                     active
                       ? dark
                         ? "bg-primary-foreground text-primary"
-                        : "bg-primary text-primary-foreground"
+                        : "border-[4px] bg-primary text-primary-foreground"
                       : dark
                         ? "text-primary-foreground/70 hover:bg-white/10 hover:text-primary-foreground"
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                        : "border-[4px] text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
                   {l.label}
