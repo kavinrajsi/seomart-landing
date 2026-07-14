@@ -267,10 +267,14 @@ const seed = async () => {
   }
 
   payload.logger.info('Seed complete.')
-  process.exit(0)
 }
 
-seed().catch((error) => {
+// Top-level await so `payload run` waits for the async work before the process
+// exits (a floating promise would be cut off).
+try {
+  await seed()
+  process.exit(0)
+} catch (error) {
   console.error(error)
   process.exit(1)
-})
+}

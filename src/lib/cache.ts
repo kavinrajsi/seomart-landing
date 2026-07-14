@@ -29,11 +29,25 @@ export type CacheTag = (typeof CACHE_TAGS)[keyof typeof CACHE_TAGS]
 // revalidate is a fine trade for read-your-writes.
 const EXPIRE_NOW = { expire: 0 } as const
 
+// `revalidateTag` only works inside a Next.js request/render context. Payload
+// mutations from the admin panel run in a route handler (context present), but
+// the same hooks also fire when Payload runs outside Next — seed scripts,
+// migrations, CLI — where there is no store and revalidateTag throws. Swallow
+// that specific case so those flows still succeed; the caches simply expire on
+// their normal 1h schedule instead.
+const safeRevalidate = (tag: CacheTag) => {
+  try {
+    revalidateTag(tag, EXPIRE_NOW)
+  } catch {
+    // No Next.js store (seed / migration / CLI) — nothing to revalidate.
+  }
+}
+
 /** afterChange hook for a collection or global that busts the given cache tag. */
 export const revalidateOnChange =
   (tag: CacheTag): CollectionAfterChangeHook & GlobalAfterChangeHook =>
   ({ doc }) => {
-    revalidateTag(tag, EXPIRE_NOW)
+    safeRevalidate(tag)
     return doc
   }
 
@@ -41,6 +55,6 @@ export const revalidateOnChange =
 export const revalidateOnDelete =
   (tag: CacheTag): CollectionAfterDeleteHook =>
   ({ doc }) => {
-    revalidateTag(tag, EXPIRE_NOW)
+    safeRevalidate(tag)
     return doc
   }
