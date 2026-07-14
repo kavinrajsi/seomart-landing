@@ -5,7 +5,6 @@ import Stats from "@/components/stats";
 import CaseStudies from "@/components/case-studies";
 import Services from "@/components/services";
 import Industries from "@/components/industries";
-import Process from "@/components/process";
 import Testimonials from "@/components/testimonials";
 import Offer from "@/components/offer";
 import Why from "@/components/why";
@@ -27,7 +26,6 @@ export default function Home() {
         <CaseStudies />
         <Services />
         <Industries />
-        <Process />
         <Testimonials />
         <Offer />
         <Why />
