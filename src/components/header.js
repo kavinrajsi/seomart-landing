@@ -109,10 +109,10 @@ export default function Header() {
     >
       <div className="mx-4">
         <div
-          className={`mx-auto flex max-w-6xl items-center justify-between rounded-lg border-0 border-transparent px-5 py-3 backdrop-blur-xl backdrop-saturate-150 transition-colors duration-300 ${
+          className={`mx-auto flex max-w-6xl items-center justify-between rounded-lg border-0 border-transparent px-5 py-3 lg:backdrop-blur-xl lg:backdrop-saturate-150 transition-colors duration-300 ${
             dark
-              ? "bg-primary/60 text-primary-foreground shadow-[0_2px_24px_0_rgba(0,0,0,0.35)]"
-              : "bg-background/60 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_2px_20px_0_rgba(37,37,33,0.08)]"
+              ? "bg-primary text-primary-foreground lg:bg-primary/60 shadow-[0_2px_24px_0_rgba(0,0,0,0.35)]"
+              : "bg-white text-foreground lg:bg-background/60 lg:shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_2px_20px_0_rgba(37,37,33,0.08)]"
           }`}
         >
           <Link
