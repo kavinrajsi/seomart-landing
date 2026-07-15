@@ -67,17 +67,7 @@ export const CaseStudies: CollectionConfig = {
         {
           name: 'content',
           type: 'richText',
-        },
-        {
-          name: 'media',
-          type: 'upload',
-          relationTo: 'media',
-          admin: { description: 'Optional image rendered after this section.' },
-        },
-        {
-          name: 'iframeUrl',
-          type: 'text',
-          admin: { description: 'Optional embeddable iframe URL (e.g. a Figma/Loom/YouTube embed link, or a live prototype). Rendered below this section.' },
+          admin: { description: 'Use the embed block to add iframes (YouTube, Figma, Loom, prototypes). Upload images directly in the editor.' },
         },
       ],
     },

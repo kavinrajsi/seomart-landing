@@ -149,8 +149,6 @@ export const getCaseStudies = unstable_cache(
         cover: mediaUrl(doc.coverImage),
         sections: (doc.sections ?? []).map((section: Record<string, any>, index: number) => ({
           _key: section.id ?? String(index),
-          media: mediaUrl(section.media),
-          iframe: section.iframeUrl || null,
           content: section.content ?? null,
         })),
       }))
