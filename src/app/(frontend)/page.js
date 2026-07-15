@@ -1,6 +1,5 @@
 import Header from "@/components/header";
 import Hero from "@/components/hero";
-import Showreel from "@/components/showreel";
 import LogoMarquee from "@/components/logo-marquee";
 import Stats from "@/components/stats";
 import CaseStudies from "@/components/case-studies";
@@ -21,7 +20,6 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Showreel />
         <LogoMarquee />
         <Stats />
         <CaseStudies />
