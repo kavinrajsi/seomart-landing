@@ -180,7 +180,7 @@ export default async function Services() {
   const bands = data.bands ?? [];
 
   return (
-    <section id="services" className="mx-4 scroll-mt-24 pb-10 lg:pb-30">
+    <section id="services" className="section-services mx-4 scroll-mt-24 pb-10 lg:pb-30">
       <div className="mx-auto max-w-6xl">
         <h2 className="mb-12 max-w-3xl text-4xl font-semibold sm:text-5xl lg:mb-16 lg:text-6xl">
           <AccentHeading

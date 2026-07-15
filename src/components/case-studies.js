@@ -38,7 +38,7 @@ export default async function CaseStudies() {
   }
   cases = cases ?? FALLBACK_CASES;
   return (
-    <section id="work" className="scroll-mt-24 pb-10 lg:pb-30">
+    <section id="work" className="section-work scroll-mt-24 pb-10 lg:pb-30">
       <div className="mx-4">
         <div className="mx-auto max-w-6xl border-t pt-10 lg:pt-16">
           <h2

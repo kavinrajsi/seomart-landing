@@ -44,7 +44,7 @@ export default async function LogoMarquee() {
   const rowTwo = clients.slice(half);
 
   return (
-    <section id="trusted" className="py-14 lg:py-24">
+    <section id="trusted" className="section-trusted py-14 lg:py-24">
       <p className="mb-10 text-center font-mono text-xs font-medium uppercase text-muted-foreground">
         Trusted by Leading Brands Across Industries
       </p>

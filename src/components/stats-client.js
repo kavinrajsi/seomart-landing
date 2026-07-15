@@ -21,48 +21,57 @@ export default function StatsClient({
 
   useGSAP(
     () => {
-      ScrollTrigger.config({ ignoreMobileResize: true });
-      const cards = gsap.utils.toArray("[data-stat]", section.current);
-      if (!cards.length) return;
+      // Desktop only: pinning stacks 4 stats taller than a phone viewport and
+      // overflows. Below lg (and reduced-motion) the server-rendered grid shows
+      // the final numbers statically. matchMedia auto-reverts across the bound.
+      const mm = gsap.matchMedia();
+      mm.add(
+        "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          ScrollTrigger.config({ ignoreMobileResize: true });
+          const cards = gsap.utils.toArray("[data-stat]", section.current);
+          if (!cards.length) return;
 
-      gsap.set(cards, { opacity: 0, y: 24 });
+          gsap.set(cards, { opacity: 0, y: 24 });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section.current,
-          start: "top top",
-          end: () => `+=${cards.length * 320}`,
-          pin: true,
-          scrub: true,
-          anticipatePin: 1,
-        },
-      });
-
-      cards.forEach((card, i) => {
-        const numEl = card.querySelector("[data-num]");
-        const value = parseFloat(numEl.dataset.value);
-        const decimals = parseInt(numEl.dataset.decimals || "0", 10);
-        const counter = { v: 0 };
-
-        tl.to(card, { opacity: 1, y: 0, duration: 0.4 }, i).to(
-          counter,
-          {
-            v: value,
-            duration: 0.6,
-            ease: "power2.out",
-            onUpdate: () => {
-              numEl.textContent = counter.v.toFixed(decimals);
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: section.current,
+              start: "top top",
+              end: () => `+=${cards.length * 320}`,
+              pin: true,
+              scrub: true,
+              anticipatePin: 1,
             },
-          },
-          i
-        );
-      });
+          });
+
+          cards.forEach((card, i) => {
+            const numEl = card.querySelector("[data-num]");
+            const value = parseFloat(numEl.dataset.value);
+            const decimals = parseInt(numEl.dataset.decimals || "0", 10);
+            const counter = { v: 0 };
+
+            tl.to(card, { opacity: 1, y: 0, duration: 0.4 }, i).to(
+              counter,
+              {
+                v: value,
+                duration: 0.6,
+                ease: "power2.out",
+                onUpdate: () => {
+                  numEl.textContent = counter.v.toFixed(decimals);
+                },
+              },
+              i
+            );
+          });
+        }
+      );
     },
     { scope: section }
   );
 
   return (
-    <section ref={section} className="mx-4 pb-10 lg:pb-30">
+    <section ref={section} id="stats" className="section-stats mx-4 pb-10 lg:pb-30">
       <div className="mx-auto max-w-6xl border-t pt-10 lg:pt-16">
         <h2 className="mb-12 max-w-3xl text-4xl font-semibold sm:text-5xl lg:mb-16 lg:text-6xl">
           <AccentHeading

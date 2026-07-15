@@ -3,7 +3,7 @@ import ArrowIcon from "./arrow-icon";
 
 export default function FinalCta() {
   return (
-    <section id="contact" className="scroll-mt-24 bg-primary text-primary-foreground">
+    <section id="contact" className="section-contact scroll-mt-24 bg-primary text-primary-foreground">
       <div className="mx-auto flex max-w-6xl flex-col items-center px-6 py-20 text-center lg:py-32">
         <h2
 

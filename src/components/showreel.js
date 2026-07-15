@@ -32,7 +32,7 @@ export default async function Showreel() {
   const videoSrc = fileUrl || (embed ? null : url);
 
   return (
-    <section id="showreel" className="mx-4 hidden scroll-mt-24 pb-10 lg:block lg:pb-30">
+    <section id="showreel" className="section-showreel mx-4 hidden scroll-mt-24 pb-10 lg:block lg:pb-30">
       <div className="mx-auto max-w-6xl">
         {data.heading && (
           <h2 className="mb-8 max-w-3xl text-4xl font-semibold sm:text-5xl lg:mb-12 lg:text-6xl">

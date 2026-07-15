@@ -20,7 +20,7 @@ export default async function Hero() {
     .filter((p) => p.query && p.results.length);
 
   return (
-    <section className="mx-4 pt-36 pb-10 lg:pt-44 lg:pb-20">
+    <section id="hero" className="section-hero mx-4 pt-36 pb-10 lg:pt-44 lg:pb-20">
       <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
         <h1 className="mb-8 max-w-screen-md text-4xl font-semibold text-pretty lg:text-7xl">
           {data.headline}

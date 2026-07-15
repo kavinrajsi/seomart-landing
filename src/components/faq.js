@@ -8,7 +8,7 @@ export default async function Faq() {
   const faqs = data.items ?? [];
 
   return (
-    <section id="faq" className="mx-4 scroll-mt-24 pb-10 lg:pb-30">
+    <section id="faq" className="section-faq mx-4 scroll-mt-24 pb-10 lg:pb-30">
       <div className="mx-auto max-w-6xl border-t pt-10 lg:pt-16">
         <h2 className="mb-12 max-w-3xl text-4xl font-semibold sm:text-5xl lg:mb-16 lg:text-6xl">
           <AccentHeading

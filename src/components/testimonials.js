@@ -24,7 +24,7 @@ export default async function Testimonials() {
   if (!testimonials.length) return null;
 
   return (
-    <section className="mx-4 pb-10 lg:pb-30">
+    <section id="testimonials" className="section-testimonials mx-4 pb-10 lg:pb-30">
       <div className="mx-auto max-w-6xl border-t pt-10 lg:pt-16">
         <h2 className="mb-4 max-w-3xl text-4xl font-semibold sm:text-5xl lg:text-6xl">
           Businesses that took the leap.
