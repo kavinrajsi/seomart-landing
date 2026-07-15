@@ -4,7 +4,6 @@ import LogoMarquee from "@/components/logo-marquee";
 import Stats from "@/components/stats";
 import CaseStudies from "@/components/case-studies";
 import Services from "@/components/services";
-import Industries from "@/components/industries";
 import Testimonials from "@/components/testimonials";
 import Offer from "@/components/offer";
 import Faq from "@/components/faq";
@@ -24,7 +23,6 @@ export default function Home() {
         <Stats />
         <CaseStudies />
         <Services />
-        <Industries />
         <Testimonials />
         <Offer />
         <Faq />
