@@ -20,6 +20,7 @@ import { Process } from './src/globals/Process'
 import { Offer } from './src/globals/Offer'
 import { Why } from './src/globals/Why'
 import { Faq } from './src/globals/Faq'
+import { Showreel } from './src/globals/Showreel'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -32,7 +33,7 @@ export default buildConfig({
   },
   editor: lexicalEditor(),
   collections: [Users, Media, CaseStudies, Testimonials, Clients, Leads],
-  globals: [Hero, Stats, Services, Industries, Process, Offer, Why, Faq],
+  globals: [Hero, Stats, Services, Industries, Process, Offer, Why, Faq, Showreel],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'src/payload-types.ts'),

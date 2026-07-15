@@ -104,6 +104,7 @@ export interface Config {
     offer: Offer;
     why: Why;
     faq: Faq;
+    showreel: Showreel;
   };
   globalsSelect: {
     hero: HeroSelect<false> | HeroSelect<true>;
@@ -114,6 +115,7 @@ export interface Config {
     offer: OfferSelect<false> | OfferSelect<true>;
     why: WhySelect<false> | WhySelect<true>;
     faq: FaqSelect<false> | FaqSelect<true>;
+    showreel: ShowreelSelect<false> | ShowreelSelect<true>;
   };
   locale: null;
   widgets: {
@@ -604,6 +606,24 @@ export interface Hero {
   primaryCtaHref?: string | null;
   secondaryCtaLabel?: string | null;
   secondaryCtaHref?: string | null;
+  /**
+   * Query/result groups cycled by the hero search animation. Leave empty to use the built-in defaults.
+   */
+  searchPairs?:
+    | {
+        query: string;
+        /**
+         * First result is shown as "Top result".
+         */
+        results?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -855,6 +875,37 @@ export interface Faq {
   createdAt?: string | null;
 }
 /**
+ * Homepage showreel. Provide an uploaded video OR a video URL. The section is hidden on the site until one is set.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "showreel".
+ */
+export interface Showreel {
+  id: number;
+  /**
+   * Section heading (optional).
+   */
+  heading?: string | null;
+  /**
+   * Uploaded video file (mp4/webm). Takes priority over Video URL.
+   */
+  videoFile?: (number | null) | Media;
+  /**
+   * Or a video URL — a direct .mp4/.webm link, or a YouTube/Vimeo link.
+   */
+  videoUrl?: string | null;
+  /**
+   * Poster image shown before playback (used for uploaded/direct videos).
+   */
+  poster?: (number | null) | Media;
+  /**
+   * Autoplay muted on loop (uploaded/direct videos only).
+   */
+  autoplay?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero_select".
  */
@@ -865,6 +916,18 @@ export interface HeroSelect<T extends boolean = true> {
   primaryCtaHref?: T;
   secondaryCtaLabel?: T;
   secondaryCtaHref?: T;
+  searchPairs?:
+    | T
+    | {
+        query?: T;
+        results?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1019,6 +1082,20 @@ export interface FaqSelect<T extends boolean = true> {
         a?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "showreel_select".
+ */
+export interface ShowreelSelect<T extends boolean = true> {
+  heading?: T;
+  videoFile?: T;
+  videoUrl?: T;
+  poster?: T;
+  autoplay?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

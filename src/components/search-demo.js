@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// Query/result groups cycled by the typing loop; the first group is fully
-// rendered on the server so the box never pops in empty. Each query surfaces
-// several results — the first is the "top result", the rest are related.
-const pairs = [
+// Default query/result groups cycled by the typing loop; the first group is
+// fully rendered on the server so the box never pops in empty. Each query
+// surfaces several results — the first is the "top result", the rest are
+// related. Overridable via the `pairs` prop (CMS: Hero → Search Pairs).
+const defaultPairs = [
   {
     query: "digital marketing agency for growing brands",
     results: [
@@ -111,7 +112,7 @@ const MOVE_MS = 550; // fake cursor glide to the X (matches CSS transition)
 const PRESS_MS = 160; // X pressed state before the instant clear
 const CLEAR_GAP_MS = 450; // empty beat after clear before next query types
 
-export default function SearchDemo() {
+export default function SearchDemo({ pairs = defaultPairs }) {
   const [pairIndex, setPairIndex] = useState(0);
   const [text, setText] = useState(pairs[0].query);
   const [phase, setPhase] = useState("hold"); // typing | hold | moving | clearing

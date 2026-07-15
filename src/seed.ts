@@ -63,6 +63,104 @@ const seed = async () => {
       primaryCtaHref: '#services',
       secondaryCtaLabel: 'Book a Free Audit',
       secondaryCtaHref: AUDIT_URL,
+      searchPairs: [
+        {
+          query: 'digital marketing agency for growing brands',
+          results: [
+            { text: 'Search Optimisation — SEO, AEO & GEO' },
+            { text: 'Paid Performance — Google, Meta & More' },
+            { text: 'Design — Brand, Campaign & Content' },
+          ],
+        },
+        {
+          query: 'performance marketing agency that drives roi',
+          results: [
+            { text: 'Paid Performance — Google, Meta & More' },
+            { text: 'Conversion & Tracking — GA4, GTM & Attribution' },
+            { text: 'Landing Page Optimisation' },
+          ],
+        },
+        {
+          query: 'fast conversion-focused website development',
+          results: [
+            { text: 'Web Development — Performance-First Builds' },
+            { text: 'E-commerce Development' },
+            { text: 'UI/UX Design' },
+          ],
+        },
+        {
+          query: 'branding and design studio for standout brands',
+          results: [
+            { text: 'Design — Brand, Campaign & Content' },
+            { text: 'UI/UX Design' },
+            { text: 'Landing Pages' },
+          ],
+        },
+        {
+          query: 'rank higher on google and ai search',
+          results: [
+            { text: 'Search Engine Optimisation (SEO)' },
+            { text: 'Answer Engine Optimisation (AEO)' },
+            { text: 'Generative Engine Optimisation (GEO)' },
+          ],
+        },
+        {
+          query: 'google ads agency to lower cost per lead',
+          results: [
+            { text: 'Google Ads Management' },
+            { text: 'Meta Advertising' },
+            { text: 'Conversion & Tracking' },
+          ],
+        },
+        {
+          query: 'ecommerce website that converts more sales',
+          results: [
+            { text: 'E-commerce Development' },
+            { text: 'Landing Page Optimisation' },
+            { text: 'Conversion & Tracking' },
+          ],
+        },
+        {
+          query: 'social media content and campaign design',
+          results: [
+            { text: 'Design — Brand, Campaign & Content' },
+            { text: 'Meta Advertising' },
+            { text: 'UI/UX Design' },
+          ],
+        },
+        {
+          query: 'show up in featured snippets and voice search',
+          results: [
+            { text: 'Answer Engine Optimisation (AEO)' },
+            { text: 'Technical & Content Excellence' },
+            { text: 'Search Engine Optimisation (SEO)' },
+          ],
+        },
+        {
+          query: 'get cited by chatgpt and ai assistants',
+          results: [
+            { text: 'AI Optimisation (AIO)' },
+            { text: 'Generative Engine Optimisation (GEO)' },
+            { text: 'Answer Engine Optimisation (AEO)' },
+          ],
+        },
+        {
+          query: 'visibility across google ai overviews and gemini',
+          results: [
+            { text: 'Generative Engine Optimisation (GEO)' },
+            { text: 'AI Optimisation (AIO)' },
+            { text: 'Technical & Content Excellence' },
+          ],
+        },
+        {
+          query: 'improve search experience and click-through',
+          results: [
+            { text: 'Search Experience Optimisation (SXO)' },
+            { text: 'Landing Page Optimisation' },
+            { text: 'UI/UX Design' },
+          ],
+        },
+      ],
     },
   })
 

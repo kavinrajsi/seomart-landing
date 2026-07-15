@@ -11,6 +11,14 @@ export default async function Hero() {
   const data = await getHero();
   if (!data) return null;
 
+  // CMS-defined search-demo pairs; empty → component falls back to defaults.
+  const searchPairs = (data.searchPairs ?? [])
+    .map((p) => ({
+      query: p.query,
+      results: (p.results ?? []).map((r) => r.text).filter(Boolean),
+    }))
+    .filter((p) => p.query && p.results.length);
+
   return (
     <section className="mx-4 pt-36 pb-10 lg:pt-44 lg:pb-20">
       <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
@@ -38,7 +46,7 @@ export default async function Hero() {
           )}
         </div>
         <div className="w-full">
-          <SearchDemo />
+          <SearchDemo pairs={searchPairs.length ? searchPairs : undefined} />
         </div>
       </div>
     </section>

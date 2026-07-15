@@ -35,6 +35,16 @@ export default function Preloader() {
   const bar = useRef(null);
 
   const [expanded, setExpanded] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Show-reel video widget is desktop-only; don't even download it on mobile.
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   useGSAP(() => {
     document.body.style.overflow = "hidden";
@@ -55,6 +65,9 @@ export default function Preloader() {
     tl.add(() => {
       document.body.style.overflow = "";
       overlay.current.style.pointerEvents = "none"; // card keeps its own
+      // Intro done: drop below the header/menu (z-90) and cookie banner (z-80)
+      // so the docked widget never covers site chrome.
+      overlay.current.style.zIndex = "40";
     });
     tl.to(bg.current, { opacity: 0, duration: 0.6, ease: "power2.out" }, ">");
     tl.to(counter.current, { opacity: 0, duration: 0.4 }, "<");
@@ -162,22 +175,24 @@ export default function Preloader() {
         000%
       </span>
 
-      <div ref={card} className="pointer-events-auto absolute left-6 top-6">
+      <div ref={card} className="pointer-events-auto absolute left-6 top-6 hidden lg:block">
         <div
           ref={videoBox}
           onClick={expanded ? collapse : expand}
           className="relative h-[89px] w-[134px] cursor-pointer overflow-hidden rounded-t-[4px] bg-foreground shadow-2xl"
         >
-          <video
-            ref={video}
-            className="h-full w-full object-cover"
-            src={VIDEO_SRC}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-          />
+          {isDesktop && (
+            <video
+              ref={video}
+              className="h-full w-full object-cover"
+              src={VIDEO_SRC}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+            />
+          )}
 
           {expanded && (
             <button

@@ -47,6 +47,7 @@ export const getProcess = cachedGlobal('process', CACHE_TAGS.process)
 export const getOffer = cachedGlobal('offer', CACHE_TAGS.offer)
 export const getWhy = cachedGlobal('why', CACHE_TAGS.why)
 export const getFaq = cachedGlobal('faq', CACHE_TAGS.faq)
+export const getShowreel = cachedGlobal('showreel', CACHE_TAGS.showreel)
 
 /** Testimonials, ordered. Returns [] on error. */
 export const getTestimonials = unstable_cache(

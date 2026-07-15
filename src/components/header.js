@@ -94,10 +94,10 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-[18px] left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-[18px] left-0 right-0 z-[90] transition-all duration-300 ${
         hidden
           ? "pointer-events-none -translate-y-[200%] opacity-0"
-          : "translate-y-0 opacity-100"
+          : "opacity-100"
       }`}
     >
       <div className="mx-4">
@@ -177,7 +177,7 @@ export default function Header() {
 
         {open && (
           <div
-            className={`fixed inset-x-4 top-[84px] bottom-0 z-[60] flex flex-col rounded-lg border-[1px] p-4 shadow-2xl transition-colors duration-300 lg:hidden ${
+            className={`fixed inset-x-4 top-[84px] bottom-0 z-[60] flex flex-col rounded-lg border-[1px] p-4 shadow-bottom-sides transition-colors duration-300 lg:hidden ${
               dark
                 ? "border-foreground/15 bg-primary text-primary-foreground"
                 : "border-black/10 bg-background text-foreground"

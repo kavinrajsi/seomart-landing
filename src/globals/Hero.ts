@@ -30,6 +30,25 @@ export const Hero: GlobalConfig = {
         { name: 'secondaryCtaHref', type: 'text', admin: { width: '50%' } },
       ],
     },
+    {
+      name: 'searchPairs',
+      type: 'array',
+      labels: { singular: 'Search Pair', plural: 'Search Pairs' },
+      admin: {
+        description:
+          'Query/result groups cycled by the hero search animation. Leave empty to use the built-in defaults.',
+      },
+      fields: [
+        { name: 'query', type: 'text', required: true },
+        {
+          name: 'results',
+          type: 'array',
+          labels: { singular: 'Result', plural: 'Results' },
+          admin: { description: 'First result is shown as "Top result".' },
+          fields: [{ name: 'text', type: 'text', required: true }],
+        },
+      ],
+    },
   ],
   hooks: {
     afterChange: [revalidateOnChange(CACHE_TAGS.hero)],
