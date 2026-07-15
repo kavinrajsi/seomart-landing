@@ -247,6 +247,10 @@ export interface CaseStudy {
          * Optional image rendered after this section.
          */
         media?: (number | null) | Media;
+        /**
+         * Optional embeddable iframe URL (e.g. a Figma/Loom/YouTube embed link, or a live prototype). Rendered below this section.
+         */
+        iframeUrl?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -490,6 +494,7 @@ export interface CaseStudiesSelect<T extends boolean = true> {
     | {
         content?: T;
         media?: T;
+        iframeUrl?: T;
         id?: T;
       };
   updatedAt?: T;

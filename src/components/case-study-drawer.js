@@ -183,6 +183,18 @@ export default function CaseStudyDrawer({ study, onClose }) {
                     />
                   </figure>
                 )}
+                {section.iframe && (
+                  <div className="my-8 aspect-video w-full overflow-hidden rounded-lg border border-border bg-muted">
+                    <iframe
+                      src={section.iframe}
+                      title=""
+                      className="h-full w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  </div>
+                )}
               </section>
             ))
           ) : (
