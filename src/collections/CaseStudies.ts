@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { CACHE_TAGS, revalidateOnChange, revalidateOnDelete } from '@/lib/cache'
 
 export const CaseStudies: CollectionConfig = {
@@ -67,6 +68,11 @@ export const CaseStudies: CollectionConfig = {
         {
           name: 'content',
           type: 'richText',
+          editor: lexicalEditor({
+            features: ({ defaultFeatures }) => [
+              ...defaultFeatures,
+            ],
+          }),
           admin: { description: 'Use the embed block to add iframes (YouTube, Figma, Loom, prototypes). Upload images directly in the editor.' },
         },
       ],
