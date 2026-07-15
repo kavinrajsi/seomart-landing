@@ -69,21 +69,23 @@ const jsxConverters = ({ defaultConverters }) => ({
       <img src={doc.url} alt={alt} loading="lazy" className="mb-4 w-full bg-muted" />
     );
   },
-  embed: ({ node }) => {
-    const url = node.fields?.url;
-    if (!url) return null;
-    return (
-      <div className="my-8 aspect-video w-full overflow-hidden rounded-lg border border-border bg-muted">
-        <iframe
-          src={url}
-          title=""
-          className="h-full w-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          loading="lazy"
-        />
-      </div>
-    );
+  blocks: {
+    embed: ({ node }) => {
+      const url = node.fields?.url;
+      if (!url) return null;
+      return (
+        <div className="my-8 aspect-video w-full overflow-hidden rounded-lg border border-border bg-muted">
+          <iframe
+            src={url}
+            title=""
+            className="h-full w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+          />
+        </div>
+      );
+    },
   },
 });
 

@@ -1,6 +1,21 @@
-import type { CollectionConfig } from 'payload'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import type { Block, CollectionConfig } from 'payload'
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { CACHE_TAGS, revalidateOnChange, revalidateOnDelete } from '@/lib/cache'
+
+const embedBlock: Block = {
+  slug: 'embed',
+  labels: { singular: 'Embed', plural: 'Embeds' },
+  fields: [
+    {
+      name: 'url',
+      type: 'text',
+      required: true,
+      admin: {
+        description: 'Paste the embeddable URL (YouTube embed link, Figma prototype, Loom video, etc.)',
+      },
+    },
+  ],
+}
 
 export const CaseStudies: CollectionConfig = {
   slug: 'case-studies',
@@ -71,6 +86,9 @@ export const CaseStudies: CollectionConfig = {
           editor: lexicalEditor({
             features: ({ defaultFeatures }) => [
               ...defaultFeatures,
+              BlocksFeature({
+                blocks: [embedBlock],
+              }),
             ],
           }),
           admin: { description: 'Use the embed block to add iframes (YouTube, Figma, Loom, prototypes). Upload images directly in the editor.' },

@@ -31,11 +31,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  editor: lexicalEditor({
-    features: ({ defaultFeatures }) => [
-      ...defaultFeatures,
-    ],
-  }),
+  editor: lexicalEditor(),
   collections: [Users, Media, CaseStudies, Testimonials, Clients, Leads],
   globals: [Hero, Stats, Services, Industries, Process, Offer, Why, Faq, Showreel],
   secret: process.env.PAYLOAD_SECRET || '',
