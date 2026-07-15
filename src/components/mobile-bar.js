@@ -32,14 +32,14 @@ export default function MobileBar() {
     >
       <a
         href={`tel:${PHONE}`}
-        className="flex-1 px-6 py-4 text-center text-base font-semibold"
+        className="flex-1 whitespace-nowrap px-3 py-4 text-center text-sm font-semibold"
       >
         Call Us
       </a>
       <button
         type="button"
         onClick={() => window.dispatchEvent(new Event("open-audit"))}
-        className="flex-1 border-l border-primary-foreground/20 px-6 py-4 text-center text-base font-semibold"
+        className="flex-1 whitespace-nowrap border-l border-primary-foreground/20 px-3 py-4 text-center text-sm font-semibold"
       >
         Book a Free Audit
       </button>

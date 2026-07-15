@@ -42,6 +42,13 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  useEffect(() => {
     const sections = links
       .map((link) => document.getElementById(anchorId(link.href)))
       .filter(Boolean);
@@ -177,14 +184,14 @@ export default function Header() {
 
         {open && (
           <div
-            className={`fixed inset-x-4 top-[84px] bottom-0 z-[60] flex flex-col rounded-lg border-[1px] p-4 shadow-bottom-sides transition-colors duration-300 lg:hidden ${
+            className={`fixed inset-x-4 top-[80px] bottom-0 z-[60] flex flex-col rounded-lg order-0 border-transparent px-5 py-3 backdrop-blur-xl backdrop-saturate-150 transition-colors duration-300 lg:hidden ${
               dark
-                ? "border-foreground/15 bg-primary text-primary-foreground"
-                : "border-black/10 bg-background text-foreground"
+                ? "bg-primary text-primary-foreground"
+                : "bg-background/60 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_2px_20px_0_rgba(37,37,33,0.08)]"
             }`}
           >
             <nav
-              className="flex flex-1 flex-col justify-center gap-1"
+              className="flex flex-1 flex-col justify-start gap-1"
               aria-label="Mobile"
             >
               {links.map((l) => {
@@ -194,7 +201,7 @@ export default function Header() {
                     key={l.href}
                     href={l.href}
                     aria-current={active ? "true" : undefined}
-                    className={`rounded-lg px-4 py-4 text-2xl font-medium ${
+                    className={`rounded-lg text-2xl font-medium ${
                       active
                         ? dark
                           ? "bg-primary-foreground text-primary"
