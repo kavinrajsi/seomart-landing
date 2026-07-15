@@ -119,7 +119,7 @@ export default function AuditForm({ open, onClose }) {
     `${inputBase} ${errors[key] ? "border-red-500 focus:border-red-500" : ""}`;
 
   return (
-    <div className={`fixed inset-0 z-[70] flex lg:items-center lg:justify-center ${visible ? "" : "pointer-events-none"}`}>
+    <div className={`fixed inset-0 z-[98] flex lg:items-center lg:justify-center ${visible ? "" : "pointer-events-none"}`}>
       <button
         type="button"
         aria-label="Close form"
@@ -132,7 +132,7 @@ export default function AuditForm({ open, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-label="Book a free audit"
-        className={`relative z-10 mt-auto max-h-[92vh] w-full overflow-y-auto rounded-t-2xl bg-background p-6 shadow-2xl transition-all duration-300 ease-out sm:p-8 lg:m-0 lg:max-w-lg lg:rounded-2xl ${
+        className={`relative z-[99] mt-auto max-h-[92vh] w-full overflow-y-auto rounded-t-2xl bg-background p-6 shadow-2xl transition-all duration-300 ease-out sm:p-8 lg:m-0 lg:max-w-lg lg:rounded-2xl ${
           visible
             ? "translate-y-0 opacity-100 lg:scale-100"
             : "translate-y-full opacity-100 lg:translate-y-4 lg:scale-95 lg:opacity-0"

@@ -11,7 +11,7 @@ const anekTamil = Anek_Tamil({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const SITE_URL = "https://searchmadarth-landing.vercel.app";
+const SITE_URL = "http://seomart.vercel.app";
 const TITLE =
   "SearchMadarth® — SEO, AEO & GEO Agency | We Search. We Build. We Grow Your Business.";
 const DESCRIPTION =
@@ -30,24 +30,6 @@ export const metadata = {
     template: "%s | SearchMadarth®",
   },
   description: DESCRIPTION,
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-icon.png",
-  },
-  keywords: [
-    "SEO agency India",
-    "Answer Engine Optimisation",
-    "AEO",
-    "Generative Engine Optimisation",
-    "GEO",
-    "AI search optimisation",
-    "AIO",
-    "digital marketing agency India",
-    "Google Ads management",
-    "Meta advertising",
-    "performance marketing SME",
-    "web development agency",
-  ],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

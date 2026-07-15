@@ -15,7 +15,7 @@ export default function CookiePolicy() {
   return (
     <PolicyPage title="Cookie Policy" lastUpdated="14 July 2026">
       <PolicyText>
-        This Cookie Policy explains how SearchMadarth® ([LEGAL ENTITY NAME],
+        This Cookie Policy explains how SearchMadarth® (Pixel Boy Media Publicities Private Limited,
         &quot;we&quot;, &quot;us&quot; or &quot;our&quot;) uses cookies and
         similar technologies on this website. It should be read together with
         our Privacy Policy.
@@ -60,8 +60,7 @@ export default function CookiePolicy() {
 
       <PolicyHeading>Contact Us</PolicyHeading>
       <PolicyText>
-        SearchMadarth® ([LEGAL ENTITY NAME]), [REGISTERED ADDRESS], Chennai,
-        India. Phone: +91 86677 67447. Email: [EMAIL].
+        SearchMadarth® (Pixel Boy Media Publicities Private Limited), 4, Alamelu Manga Puram Rd, Saradapuram, Mylapore, Chennai, Greater Chennai, Tamil Nadu 600004, India. Phone: +91 86677 67447. Email: business@madarth.com.
       </PolicyText>
     </PolicyPage>
   );

@@ -1,6 +1,6 @@
 import { getFaq, getServices } from "@/lib/payload";
 
-const SITE_URL = "https://searchmadarth-landing.vercel.app";
+const SITE_URL = "http://seomart.vercel.app";
 
 export default async function StructuredData() {
   const [faqData, servicesData] = await Promise.all([getFaq(), getServices()]);

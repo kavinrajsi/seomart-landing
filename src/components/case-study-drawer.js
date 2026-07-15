@@ -105,7 +105,7 @@ export default function CaseStudyDrawer({ study, onClose }) {
   if (!mounted) return null;
 
   return (
-    <div className={`fixed inset-0 z-50 flex ${visible ? "" : "pointer-events-none"}`}>
+    <div className={`fixed inset-0 z-[91] flex ${visible ? "" : "pointer-events-none"}`}>
       {/* Backdrop — click closes */}
       <button
         type="button"

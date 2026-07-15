@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Logo from "./logo";
-import CookieSettingsButton from "./cookie-settings-button";
 
 const links = [
   { href: "/", label: "Home" },
@@ -52,7 +51,6 @@ export default function Footer() {
                 {link.label}
               </Link>
             ))}
-            <CookieSettingsButton className="font-mono text-[11px] uppercase text-primary-foreground/80 hover:text-primary-foreground" />
           </nav>
           <p className="text-center font-mono text-[11px] uppercase text-primary-foreground/80">
             © {new Date().getFullYear()} SearchMadarth®. All rights reserved.

@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
   return (
     <PolicyPage title="Privacy Policy" lastUpdated="14 July 2026">
       <PolicyText>
-        SearchMadarth® ([LEGAL ENTITY NAME], &quot;we&quot;, &quot;us&quot; or
+        SearchMadarth® (Pixel Boy Media Publicities Private Limited, &quot;we&quot;, &quot;us&quot; or
         &quot;our&quot;) respects your privacy and is committed to protecting
         the personal information you share with us. This Privacy Policy
         explains what information we collect, how we use it, and the choices
@@ -81,8 +81,7 @@ export default function PrivacyPolicy() {
 
       <PolicyHeading>Contact Us</PolicyHeading>
       <PolicyText>
-        SearchMadarth® ([LEGAL ENTITY NAME]), [REGISTERED ADDRESS], Chennai,
-        India. Phone: +91 86677 67447. Email: [EMAIL].
+        SearchMadarth® (Pixel Boy Media Publicities Private Limited), 4, Alamelu Manga Puram Rd, Saradapuram, Mylapore, Chennai, Greater Chennai, Tamil Nadu 600004, India. Phone: +91 86677 67447. Email: business@madarth.com.
       </PolicyText>
     </PolicyPage>
   );

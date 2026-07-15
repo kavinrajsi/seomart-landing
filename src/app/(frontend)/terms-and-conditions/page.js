@@ -17,7 +17,7 @@ export default function TermsAndConditions() {
       <PolicyText>
         These Terms &amp; Conditions (&quot;Terms&quot;) govern your use of the
         SearchMadarth® website and any services provided by SearchMadarth®
-        ([LEGAL ENTITY NAME], &quot;we&quot;, &quot;us&quot; or
+        (Pixel Boy Media Publicities Private Limited, &quot;we&quot;, &quot;us&quot; or
         &quot;our&quot;). By using this website or engaging our services, you
         agree to these Terms.
       </PolicyText>
@@ -97,8 +97,7 @@ export default function TermsAndConditions() {
 
       <PolicyHeading>Contact Us</PolicyHeading>
       <PolicyText>
-        SearchMadarth® ([LEGAL ENTITY NAME]), [REGISTERED ADDRESS], Chennai,
-        India. Phone: +91 86677 67447. Email: [EMAIL].
+        SearchMadarth® (Pixel Boy Media Publicities Private Limited), 4, Alamelu Manga Puram Rd, Saradapuram, Mylapore, Chennai, Greater Chennai, Tamil Nadu 600004, India. Phone: +91 86677 67447. Email: business@madarth.com.
       </PolicyText>
     </PolicyPage>
   );

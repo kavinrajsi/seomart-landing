@@ -30,7 +30,7 @@ export default function Preloader() {
     tl.add(() => {
       document.body.style.overflow = "";
       overlay.current.style.pointerEvents = "none";
-      overlay.current.style.zIndex = "40";
+      overlay.current.style.zIndex = "95";
     });
     tl.to(bg.current, { opacity: 0, duration: 0.6, ease: "power2.out" }, ">");
     tl.to(counter.current, { opacity: 0, duration: 0.4 }, "<");
