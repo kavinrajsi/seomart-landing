@@ -8,7 +8,6 @@ import Services from "@/components/services";
 import Industries from "@/components/industries";
 import Testimonials from "@/components/testimonials";
 import Offer from "@/components/offer";
-import Why from "@/components/why";
 import Faq from "@/components/faq";
 import FinalCta from "@/components/final-cta";
 import Footer from "@/components/footer";
@@ -30,7 +29,6 @@ export default function Home() {
         <Industries />
         <Testimonials />
         <Offer />
-        <Why />
         <Faq />
         <FinalCta />
       </main>
