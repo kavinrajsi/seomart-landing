@@ -124,9 +124,9 @@ function ServiceCard({ icon, title, body }) {
   );
 }
 
-// Sticky pin-stack for all breakpoints: each card's title bar (h-16 = 64px)
-// peeks above the next, so TOP_BASE clears the fixed header and every card
-// offsets by one bar-height. Mobile uses 70vh, desktop uses 100svh.
+// Desktop-only sticky pin-stack: each card's title bar (h-16 = 64px) peeks
+// above the next, so TOP_BASE clears the fixed header and every card offsets
+// by one bar-height. Mobile renders a plain static stack (no animation).
 const HEADER_H = 64;
 const TOP_BASE = 24;
 
@@ -134,10 +134,10 @@ function ServiceBand({ band, index, isLast }) {
   const cards = band.cards ?? [];
   // Last card gets no tall min-height so the deck releases into the CTA
   // sooner once it pins; earlier cards keep full-height to pace the stack.
-  const height = isLast ? "" : "min-h-[70vh] lg:min-h-[100svh]";
+  const height = isLast ? "" : "lg:min-h-[100svh]";
   return (
     <article
-      className={`stack-card mb-0 flex flex-col border-[1px] bg-card sticky ${height}`}
+      className={`stack-card mb-0 flex flex-col border-[1px] bg-card lg:sticky ${height}`}
       style={{ top: `${TOP_BASE + index * HEADER_H}px` }}
     >
       <header className="flex h-16 items-center justify-between gap-4 border-b-[1px] bg-card px-6 lg:px-10">
