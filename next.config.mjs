@@ -4,6 +4,11 @@ import { withPayload } from '@payloadcms/next/withPayload'
 const nextConfig = {
   /* config options here */
   reactCompiler: true,
+  api: {
+    bodyParser: {
+      sizeLimit: '50mb',
+    },
+  },
 };
 
 export default withPayload(nextConfig);
