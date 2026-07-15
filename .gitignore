@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Payload local (disk) media uploads — production uses Vercel Blob
 /media
+
+# Payload migrations — schema is dev-pushed to the shared Neon DB
+src/migrations/
